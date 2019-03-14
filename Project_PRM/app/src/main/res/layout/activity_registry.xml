@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistryActivity">
+    tools:context=".view.RegistryActivity">
 
     <EditText
         android:id="@+id/editText3"
@@ -12,6 +12,7 @@
         android:layout_height="58dp"
         android:layout_marginTop="80dp"
         android:drawableLeft="@drawable/user"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Tên đăng nhập"
         android:inputType="textPersonName"
@@ -28,6 +29,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:drawableLeft="@drawable/password"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Mật khẩu"
         android:inputType="textPassword"
@@ -43,6 +45,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:drawableLeft="@drawable/email"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -58,6 +61,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:drawableLeft="@drawable/phone"
+        android:drawablePadding="5dp"
         android:ems="10"
         android:hint="Số điện thoại"
         android:inputType="numberSigned"

@@ -1,9 +1,11 @@
-package com.example.buith.project_prm;
+package com.example.buith.project_prm.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.buith.project_prm.R;
 
 public class RegistryActivity extends AppCompatActivity {
 
