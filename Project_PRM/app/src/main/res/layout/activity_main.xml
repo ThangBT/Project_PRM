@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    tools:context=".activity.MainActivity">
 
     <EditText
         android:id="@+id/etUsername"
@@ -41,6 +41,7 @@
         android:layout_width="263dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:onClick="login"
         android:text="Đăng nhập"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"

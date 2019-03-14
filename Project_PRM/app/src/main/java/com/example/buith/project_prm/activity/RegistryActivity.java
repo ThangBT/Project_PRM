@@ -1,6 +1,5 @@
-package com.example.buith.project_prm.view;
+package com.example.buith.project_prm.activity;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;

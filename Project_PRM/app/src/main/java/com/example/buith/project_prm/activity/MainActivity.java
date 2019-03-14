@@ -1,4 +1,4 @@
-package com.example.buith.project_prm.view;
+package com.example.buith.project_prm.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,8 +12,12 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
+import com.example.buith.project_prm.model.Account;
+import com.example.buith.project_prm.network.LoginService;
+import com.example.buith.project_prm.network.RetrofitInstance;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -30,7 +34,12 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,6 +72,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void login(View view){
+        LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
+        Call<Account> call = loginService.login("cuong", "123456");
+        Log.wtf("URL Called", call.request().url() + "");
+        call.enqueue(new Callback<Account>() {
+            @Override
+            public void onResponse(Call<Account> call, Response<Account> response) {
+                Account ac = response.body();
+            }
+
+            @Override
+            public void onFailure(Call<Account> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     //Login facebook with permisstion
