@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.model.Account;
-import com.example.buith.project_prm.network.LoginService;
+import com.example.buith.project_prm.service.LoginService;
 import com.example.buith.project_prm.network.RetrofitInstance;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -34,7 +34,6 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import retrofit2.Call;
