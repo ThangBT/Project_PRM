@@ -18,6 +18,7 @@ import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.model.Account;
 import com.example.buith.project_prm.service.LoginService;
 import com.example.buith.project_prm.network.RetrofitInstance;
+import com.example.buith.project_prm.utils.Define;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -40,12 +41,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static MainActivity mainActivity;
     private Button btnFacebook;
     private CallbackManager callbackManager;
     private FacebookCallback<LoginResult> loginResult;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,20 +76,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view){
-        LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
-        Call<Account> call = loginService.login("cuong", "123456");
-        Log.wtf("URL Called", call.request().url() + "");
-        call.enqueue(new Callback<Account>() {
-            @Override
-            public void onResponse(Call<Account> call, Response<Account> response) {
-                Account ac = response.body();
-            }
+//        LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
+//        Call<Object> call = loginService.login();
+//        Log.wtf("URL Called", call.request().url() + "");
+//
+//        if(isNetworkAvailable()){
+//            showLoading();
+//            call.enqueue(new Callback<Object>() {
+//                @Override
+//                public void onResponse(Call<Object> call, Response<Object> response) {
+//                    //Account ac = response.body();
+//                    hideLoading();
+//                    Toast.makeText(MainActivity.this, "Welcome ", Toast.LENGTH_SHORT).show();
+//                }
+//
+//                @Override
+//                public void onFailure(Call<Object> call, Throwable t) {
+//                    hideLoading();
+//                    Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//        }else{
+//            hideLoading();
+//            Toast.makeText(MainActivity.this, Define.NO_INTERNET, Toast.LENGTH_SHORT).show();
+//        }
 
-            @Override
-            public void onFailure(Call<Account> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(intent);
     }
 
     //Login facebook with permisstion
@@ -193,4 +208,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), RegistryActivity.class);
         startActivity(intent);
     }
+
+
 }
