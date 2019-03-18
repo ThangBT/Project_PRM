@@ -2,14 +2,44 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/login_menu"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Đăng nhập/Đăng ký"
+        android:drawableLeft="@drawable/user_avatar"
+        android:textSize="14sp"
+        android:background="@color/tab_background_color"
+        android:gravity="left|center_vertical"
+        android:drawablePadding="20dp" />
+
+    <Button
+        android:id="@+id/setting_menu"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/login_menu"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="252dp"
-        android:text="Menu" />
+        android:drawableLeft="@drawable/setting"
+        android:padding="16dp"
+        android:text="Cài đặt"
+        android:textSize="14sp"
+        android:background="@color/tab_background_color"
+        android:gravity="left|center_vertical"
+        android:drawablePadding="20dp" />
+
+    <Button
+        android:id="@+id/logout_menu"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/setting_menu"
+        android:layout_alignParentStart="true"
+        android:drawableLeft="@drawable/logout"
+        android:padding="16dp"
+        android:text="Đăng xuất"
+        android:textSize="14sp"
+        android:background="@color/tab_background_color"
+        android:gravity="left|center_vertical"
+        android:drawablePadding="20dp" />
+
 </RelativeLayout>

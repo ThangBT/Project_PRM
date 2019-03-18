@@ -17,25 +17,10 @@ public class HomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        initLayout();
-    }
-
-    public void initLayout(){
         tabLayout = findViewById(R.id.tabLayout_id);
         viewPager = findViewById(R.id.viewHome_id);
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment());
-        adapter.addFragment(new HistoryFragment());
-        adapter.addFragment(new MenuFragment());
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        TabLayout.Tab tabHome = tabLayout.getTabAt(0);
-        tabHome.setIcon(R.drawable.home);
-        TabLayout.Tab tabHis = tabLayout.getTabAt(1);
-        tabHis.setIcon(R.drawable.document);
-        TabLayout.Tab tabMenu = tabLayout.getTabAt(2);
-        tabMenu.setIcon(R.drawable.menu);
-
+        initLayout(tabLayout, viewPager);
     }
+
+
 }

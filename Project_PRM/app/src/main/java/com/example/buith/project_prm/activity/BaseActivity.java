@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.buith.project_prm.R;
@@ -43,5 +45,23 @@ public abstract class BaseActivity extends AppCompatActivity {
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public void initLayout(TabLayout tabLayout, ViewPager viewPager){
+
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new HomeFragment());
+        adapter.addFragment(new HistoryFragment());
+        adapter.addFragment(new MenuFragment());
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        TabLayout.Tab tabHome = tabLayout.getTabAt(0);
+        tabHome.setIcon(R.drawable.home);
+        TabLayout.Tab tabHis = tabLayout.getTabAt(1);
+        tabHis.setIcon(R.drawable.document);
+        TabLayout.Tab tabMenu = tabLayout.getTabAt(2);
+        tabMenu.setIcon(R.drawable.menu);
+
     }
 }

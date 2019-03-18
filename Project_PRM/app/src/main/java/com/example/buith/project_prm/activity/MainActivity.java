@@ -54,19 +54,19 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnFacebook = (LoginButton) findViewById(R.id.btnFacebook);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        callbackManager = CallbackManager.Factory.create();
-        mainActivity = this;
-        initFaceBook();
-        LoginManager.getInstance().registerCallback(callbackManager, loginResult);
-        btnFacebook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginFaceBook();
-            }
-        });
-        printKeyHash(this);
+//        btnFacebook = (LoginButton) findViewById(R.id.btnFacebook);
+//        FacebookSdk.sdkInitialize(getApplicationContext());
+//        callbackManager = CallbackManager.Factory.create();
+//        mainActivity = this;
+//        initFaceBook();
+//        LoginManager.getInstance().registerCallback(callbackManager, loginResult);
+//        btnFacebook.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                loginFaceBook();
+//            }
+//        });
+//        printKeyHash(this);
     }
 
     @Override
