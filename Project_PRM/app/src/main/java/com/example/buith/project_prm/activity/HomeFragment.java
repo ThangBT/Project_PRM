@@ -56,11 +56,6 @@ public class HomeFragment extends Fragment {
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
         public void onClickImage(int position, String args) {
-//            Toast.makeText(homeView.getContext(), args, Toast.LENGTH_SHORT).show();
-//            ProductsFragment fragment = new ProductsFragment();
-//            FragmentManager manager = getFragmentManager();
-//            FragmentTransaction transaction = manager.beginTransaction();
-//            transaction.replace(R.id.viewHome_id, fragment).commit();
             HomeActivity homeActivity = (HomeActivity) getActivity();
             if (homeActivity != null) {
                 homeActivity.replaceFragment(new ProductsFragment());
