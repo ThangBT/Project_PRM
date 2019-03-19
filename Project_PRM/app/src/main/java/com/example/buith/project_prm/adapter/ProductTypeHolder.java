@@ -2,19 +2,31 @@ package com.example.buith.project_prm.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
+import com.example.buith.project_prm.model.FragmentCommunication;
+import com.example.buith.project_prm.model.ProductType;
 
-public class ProductTypeHolder extends RecyclerView.ViewHolder {
+import java.util.List;
+
+public class ProductTypeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private TextView textView;
     private ImageView imageView;
-    public ProductTypeHolder(@NonNull View itemView) {
+    private FragmentCommunication mComminication;
+    private List<ProductType> list;
+
+    public ProductTypeHolder(@NonNull View itemView, FragmentCommunication communication, List<ProductType> list) {
         super(itemView);
         textView = itemView.findViewById(R.id.product_type_name);
         imageView = itemView.findViewById(R.id.product_type_image);
+        this.mComminication = communication;
+        imageView.setOnClickListener(this);
+        this.list = list;
     }
 
     public TextView getTextView() {
@@ -31,5 +43,12 @@ public class ProductTypeHolder extends RecyclerView.ViewHolder {
 
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
+    }
+
+    @Override
+    public void onClick(View v) {
+        this.mComminication.onClickImage(getAdapterPosition(), list.get(getAdapterPosition()).getTypeName());
+        //Toast.makeText(itemView.getContext(), getAdapterPosition(), Toast.LENGTH_SHORT).show();
+
     }
 }

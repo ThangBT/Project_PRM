@@ -4,15 +4,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.adapter.ProductTypeAdapter;
+import com.example.buith.project_prm.model.FragmentCommunication;
 import com.example.buith.project_prm.model.ProductType;
 
 import java.util.ArrayList;
@@ -29,7 +34,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         homeView = inflater.inflate(R.layout.home_fragment, container, false);
         RecyclerView recyclerView = homeView.findViewById(R.id.my_recycler_view);
-        recyclerView.setHasFixedSize(true);
+       // recyclerView.setHasFixedSize(true);
         List<ProductType> list = new ArrayList<>();
         list.add(new ProductType("", "Thực phẩm"));
         list.add(new ProductType("", "Bất động sản"));
@@ -38,11 +43,24 @@ public class HomeFragment extends Fragment {
         list.add(new ProductType("", "Ngoại thất, đồ gia dụng"));
         list.add(new ProductType("", "Đồ điện tử"));
         list.add(new ProductType("", "Thú cưng"));
-        ProductTypeAdapter adapter = new ProductTypeAdapter(list);
+        ProductTypeAdapter adapter = new ProductTypeAdapter(this.getContext(),list, communication);
         layoutManager = new LinearLayoutManager(homeView.getContext());
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayout.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
         return homeView;
     }
+
+    FragmentCommunication communication = new FragmentCommunication() {
+        @Override
+        public void onClickImage(int position, String args) {
+            Toast.makeText(homeView.getContext(), args, Toast.LENGTH_SHORT).show();
+            ProductsFragment fragment = new ProductsFragment();
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.replace(R.id.viewHome_id, fragment).commit();
+        }
+    };
+
 }

@@ -1,5 +1,6 @@
 package com.example.buith.project_prm.adapter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,38 +11,41 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
+import com.example.buith.project_prm.model.FragmentCommunication;
 import com.example.buith.project_prm.model.ProductType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeHolder> {
+    private LayoutInflater layoutInflater;
     private List<ProductType> productTypeList ;
+    private ImageView imageView;
+    private View item;
+    private FragmentCommunication mCommunicator;
 
-    public ProductTypeAdapter(List<ProductType> productTypeList) {
+    public ProductTypeAdapter(Context context, List<ProductType> productTypeList, FragmentCommunication communication) {
         this.productTypeList = productTypeList;
+        this.layoutInflater = LayoutInflater.from(context);
+        this.mCommunicator = communication;
+
     }
 
     @NonNull
     @Override
     public ProductTypeHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
-        final View item = layoutInflater.inflate(R.layout.card_view_item, viewGroup, false);
-        TextView textView = item.findViewById(R.id.product_type_name);
-        ImageView imageView = item.findViewById(R.id.product_type_image);
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(item.getContext(), "hkshfsj", Toast.LENGTH_SHORT).show();
-            }
-        });
-        ProductTypeHolder pth = new ProductTypeHolder(item);
+        item = layoutInflater.inflate(R.layout.card_view_item, viewGroup, false);
+        imageView = item.findViewById(R.id.product_type_image);
+
+
+        ProductTypeHolder pth = new ProductTypeHolder(item, mCommunicator, productTypeList);
         return pth;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductTypeHolder productTypeHolder, int i) {
+        final int position = i;
         if(productTypeList != null){
+
             productTypeHolder.getTextView().setText(productTypeList.get(i).getTypeName());
 
         }
@@ -56,3 +60,5 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeHolder> 
         return 0;
     }
 }
+
+
