@@ -3,9 +3,11 @@ package com.example.buith.project_prm.activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,6 +45,11 @@ public class HomeFragment extends Fragment {
         list.add(new ProductType("", "Ngoại thất, đồ gia dụng"));
         list.add(new ProductType("", "Đồ điện tử"));
         list.add(new ProductType("", "Thú cưng"));
+
+        TabLayout tabLayout = homeView.findViewById(R.id.tabLayout_id);
+        ViewPager viewPager = homeView.findViewById(R.id.viewHome_id);
+        initLayout(tabLayout, viewPager);
+
         ProductTypeAdapter adapter = new ProductTypeAdapter(this.getContext(),list, communication);
         layoutManager = new LinearLayoutManager(homeView.getContext());
         ((LinearLayoutManager) layoutManager).setOrientation(LinearLayout.VERTICAL);
@@ -62,5 +69,23 @@ public class HomeFragment extends Fragment {
             transaction.replace(R.id.viewHome_id, fragment).commit();
         }
     };
+
+    public void initLayout(TabLayout tabLayout, ViewPager viewPager){
+
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
+        adapter.addFragment(new HomeFragment());
+        adapter.addFragment(new HistoryFragment());
+        adapter.addFragment(new MenuFragment());
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+        TabLayout.Tab tabHome = tabLayout.getTabAt(0);
+        tabHome.setIcon(R.drawable.home);
+        TabLayout.Tab tabHis = tabLayout.getTabAt(1);
+        tabHis.setIcon(R.drawable.document);
+        TabLayout.Tab tabMenu = tabLayout.getTabAt(2);
+        tabMenu.setIcon(R.drawable.menu);
+
+    }
 
 }

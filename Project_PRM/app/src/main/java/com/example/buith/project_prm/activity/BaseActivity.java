@@ -47,21 +47,5 @@ public abstract class BaseActivity extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public void initLayout(TabLayout tabLayout, ViewPager viewPager){
 
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment());
-        adapter.addFragment(new HistoryFragment());
-        adapter.addFragment(new MenuFragment());
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        TabLayout.Tab tabHome = tabLayout.getTabAt(0);
-        tabHome.setIcon(R.drawable.home);
-        TabLayout.Tab tabHis = tabLayout.getTabAt(1);
-        tabHis.setIcon(R.drawable.document);
-        TabLayout.Tab tabMenu = tabLayout.getTabAt(2);
-        tabMenu.setIcon(R.drawable.menu);
-
-    }
 }
