@@ -27,8 +27,6 @@ public class ProductTypeHolder extends BaseHolder<ProductType> {
 
     public ProductTypeHolder(@NonNull View itemView) {
         super(itemView);
-        imageView = itemView.findViewById(R.id.product_type_image);
-        imageView.setOnClickListener(this);
     }
 
     @Override
@@ -37,8 +35,4 @@ public class ProductTypeHolder extends BaseHolder<ProductType> {
         textView.setText(data.getTypeName());
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }

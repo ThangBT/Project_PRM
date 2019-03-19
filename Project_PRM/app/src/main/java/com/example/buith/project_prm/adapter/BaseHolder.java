@@ -17,7 +17,6 @@ public class BaseHolder<T> extends RecyclerView.ViewHolder implements View.OnCli
     public BaseHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-
         itemView.setOnClickListener(this);
     }
 
