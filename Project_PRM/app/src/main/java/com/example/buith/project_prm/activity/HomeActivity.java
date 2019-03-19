@@ -17,6 +17,11 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void replaceFragment(Fragment fragment) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.flContainer, fragment, "A").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.flContainer, fragment, "A").addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        getSupportFragmentManager().popBackStack();
     }
 }

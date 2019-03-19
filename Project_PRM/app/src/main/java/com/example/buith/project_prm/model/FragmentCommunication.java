@@ -1,5 +1,5 @@
 package com.example.buith.project_prm.model;
 
-public interface FragmentCommunication {
-    public void onClickImage(int position, String args);
+public interface FragmentCommunication<T> {
+    public void onClickImage(int position, T args);
 }

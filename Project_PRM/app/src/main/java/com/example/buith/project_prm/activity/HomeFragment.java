@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        homeView = inflater.inflate(R.layout.home_fragment, container, false);
+        homeView = getView() != null ? getView() : inflater.inflate(R.layout.home_fragment, container, false);
         RecyclerView recyclerView = homeView.findViewById(R.id.my_recycler_view);
        // recyclerView.setHasFixedSize(true);
         List<ProductType> list = new ArrayList<>();
@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
 
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
-        public void onClickImage(int position, String args) {
+        public void onClickImage(int position, Object args) {
             HomeActivity homeActivity = (HomeActivity) getActivity();
             if (homeActivity != null) {
                 homeActivity.replaceFragment(new ProductsFragment());

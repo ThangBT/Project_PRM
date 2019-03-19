@@ -20,12 +20,16 @@ public class ProductTypeHolder extends RecyclerView.ViewHolder implements View.O
     private FragmentCommunication mComminication;
     private List<ProductType> list;
 
-    public ProductTypeHolder(@NonNull View itemView, FragmentCommunication communication, List<ProductType> list) {
+    public ProductTypeHolder(@NonNull View itemView, FragmentCommunication communication) {
         super(itemView);
         textView = itemView.findViewById(R.id.product_type_name);
         imageView = itemView.findViewById(R.id.product_type_image);
         this.mComminication = communication;
         imageView.setOnClickListener(this);
+
+    }
+
+    public void setList(List<ProductType> list){
         this.list = list;
     }
 
@@ -47,8 +51,6 @@ public class ProductTypeHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
-        this.mComminication.onClickImage(getAdapterPosition(), list.get(getAdapterPosition()).getTypeName());
-        //Toast.makeText(itemView.getContext(), getAdapterPosition(), Toast.LENGTH_SHORT).show();
-
+        this.mComminication.onClickImage(getAdapterPosition(), list.get(getAdapterPosition()));
     }
 }

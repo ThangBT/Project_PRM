@@ -37,7 +37,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeHolder> 
         imageView = item.findViewById(R.id.product_type_image);
 
 
-        ProductTypeHolder pth = new ProductTypeHolder(item, mCommunicator, productTypeList);
+        ProductTypeHolder pth = new ProductTypeHolder(item, mCommunicator);
         return pth;
     }
 

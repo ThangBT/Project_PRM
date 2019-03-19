@@ -7,11 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.buith.project_prm.R;
 
 public class ProductsFragment extends Fragment {
+
+    private final static String TAG = "productFragment";
 
     private View view;
     public ProductsFragment() {
@@ -21,8 +24,17 @@ public class ProductsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.products_fragment, container, false);
-        TextView text = view.findViewById(R.id.textView2);
-        text.setText("fgdgdgdgdfg");
+
+        ImageView imageView = view.findViewById(R.id.imageView);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HomeActivity homeActivity = (HomeActivity) getActivity();
+                if (homeActivity != null) {
+                    homeActivity.onBackPressed();
+                }
+            }
+        });
 
         return view;
     }
