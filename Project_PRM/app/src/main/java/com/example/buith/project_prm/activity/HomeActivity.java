@@ -18,6 +18,7 @@ public class HomeActivity extends BaseActivity {
 //        tabLayout = findViewById(R.id.tabLayout_id);
 //        viewPager = findViewById(R.id.viewHome_id);
 //        initLayout(tabLayout, viewPager);
+        getSupportFragmentManager().beginTransaction().add(R.id.flContainer, new HomeFragment()).commit();
     }
 
 }

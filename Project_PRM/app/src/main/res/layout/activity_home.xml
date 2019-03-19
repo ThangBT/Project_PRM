@@ -7,10 +7,8 @@
     tools:context=".activity.HomeActivity"
     >
 
-
-    <fragment
-        android:id="@+id/fragment2"
-        android:name="com.example.buith.project_prm.activity.HomeFragment"
+    <FrameLayout
+        android:id="@+id/flContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 </FrameLayout>
