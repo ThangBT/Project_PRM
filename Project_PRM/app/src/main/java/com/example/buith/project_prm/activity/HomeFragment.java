@@ -3,17 +3,15 @@ package com.example.buith.project_prm.activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -46,13 +44,9 @@ public class HomeFragment extends Fragment {
         list.add(new ProductType("", "Đồ điện tử"));
         list.add(new ProductType("", "Thú cưng"));
 
-        TabLayout tabLayout = homeView.findViewById(R.id.tabLayout_id);
-        ViewPager viewPager = homeView.findViewById(R.id.viewHome_id);
-        initLayout(tabLayout, viewPager);
-
         ProductTypeAdapter adapter = new ProductTypeAdapter(this.getContext(),list, communication);
-        layoutManager = new LinearLayoutManager(homeView.getContext());
-        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayout.VERTICAL);
+        layoutManager = new GridLayoutManager(homeView.getContext(), 2);
+
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
@@ -62,30 +56,15 @@ public class HomeFragment extends Fragment {
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
         public void onClickImage(int position, String args) {
-            Toast.makeText(homeView.getContext(), args, Toast.LENGTH_SHORT).show();
-            ProductsFragment fragment = new ProductsFragment();
-            FragmentManager manager = getFragmentManager();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.replace(R.id.viewHome_id, fragment).commit();
+//            Toast.makeText(homeView.getContext(), args, Toast.LENGTH_SHORT).show();
+//            ProductsFragment fragment = new ProductsFragment();
+//            FragmentManager manager = getFragmentManager();
+//            FragmentTransaction transaction = manager.beginTransaction();
+//            transaction.replace(R.id.viewHome_id, fragment).commit();
+            HomeActivity homeActivity = (HomeActivity) getActivity();
+            if (homeActivity != null) {
+                homeActivity.replaceFragment(new ProductsFragment());
+            }
         }
     };
-
-    public void initLayout(TabLayout tabLayout, ViewPager viewPager){
-
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
-        adapter.addFragment(new HomeFragment());
-        adapter.addFragment(new HistoryFragment());
-        adapter.addFragment(new MenuFragment());
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-        TabLayout.Tab tabHome = tabLayout.getTabAt(0);
-        tabHome.setIcon(R.drawable.home);
-        TabLayout.Tab tabHis = tabLayout.getTabAt(1);
-        tabHis.setIcon(R.drawable.document);
-        TabLayout.Tab tabMenu = tabLayout.getTabAt(2);
-        tabMenu.setIcon(R.drawable.menu);
-
-    }
-
 }
