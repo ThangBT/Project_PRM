@@ -16,49 +16,36 @@ import com.example.buith.project_prm.model.ProductType;
 
 import java.util.List;
 
-public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeHolder> {
-    private LayoutInflater layoutInflater;
-    private List<ProductType> productTypeList ;
-    private ImageView imageView;
+public class ProductTypeAdapter extends BaseAdapter<ProductType> {
     private View item;
     private FragmentCommunication mCommunicator;
 
-    public ProductTypeAdapter(Context context, List<ProductType> productTypeList, FragmentCommunication communication) {
-        this.productTypeList = productTypeList;
-        this.layoutInflater = LayoutInflater.from(context);
-        this.mCommunicator = communication;
+    public ProductTypeAdapter(Context context, List<ProductType> productTypeList) {
+        super(context, productTypeList);
 
     }
 
-    @NonNull
     @Override
-    public ProductTypeHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        item = layoutInflater.inflate(R.layout.card_view_item, viewGroup, false);
-        imageView = item.findViewById(R.id.product_type_image);
+    public void setOnItemClickListener(FragmentCommunication listener) {
+        this.mCommunicator = listener;
+    }
 
+    @Override
+    protected BaseHolder onActualCreateHolder(@NonNull ViewGroup parent, int viewType) {
+        item = LayoutInflater.from(mContext).inflate(R.layout.card_view_item, parent, false);
+        ProductTypeHolder pth = new ProductTypeHolder(item);
+        pth.setListener(mCommunicator);
 
-        ProductTypeHolder pth = new ProductTypeHolder(item, mCommunicator);
         return pth;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductTypeHolder productTypeHolder, int i) {
-        final int position = i;
-        if(productTypeList != null){
+    protected void onActualBindViewHolder(@NonNull BaseHolder<ProductType> holder, int position) {
 
-            productTypeHolder.getTextView().setText(productTypeList.get(i).getTypeName());
-
-        }
     }
 
-    @Override
-    public int getItemCount() {
 
-        if(productTypeList != null){
-            return productTypeList.size();
-        }
-        return 0;
-    }
+
 }
 
 

@@ -22,6 +22,10 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>>
             mListItems = listItems;
     }
 
+    public void setOnItemClickListener(FragmentCommunication listener) {
+        mListener = listener;
+    }
+
     protected abstract BaseHolder onActualCreateHolder(@NonNull ViewGroup parent, int viewType);
 
     protected abstract void onActualBindViewHolder(@NonNull BaseHolder<T> holder, int position);
@@ -42,6 +46,6 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>>
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mListItems.size();
     }
 }

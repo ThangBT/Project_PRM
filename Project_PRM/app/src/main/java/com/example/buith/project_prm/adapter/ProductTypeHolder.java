@@ -9,48 +9,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
+import com.example.buith.project_prm.activity.HomeActivity;
+import com.example.buith.project_prm.activity.ProductsFragment;
 import com.example.buith.project_prm.model.FragmentCommunication;
 import com.example.buith.project_prm.model.ProductType;
 
 import java.util.List;
 
-public class ProductTypeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    private TextView textView;
-    private ImageView imageView;
-    private FragmentCommunication mComminication;
-    private List<ProductType> list;
+import butterknife.BindView;
 
-    public ProductTypeHolder(@NonNull View itemView, FragmentCommunication communication) {
+public class ProductTypeHolder extends BaseHolder<ProductType> {
+    @BindView(R.id.product_type_name)
+     TextView textView;
+    @BindView(R.id.product_type_image)
+     ImageView imageView;
+
+
+    public ProductTypeHolder(@NonNull View itemView) {
         super(itemView);
-        textView = itemView.findViewById(R.id.product_type_name);
         imageView = itemView.findViewById(R.id.product_type_image);
-        this.mComminication = communication;
         imageView.setOnClickListener(this);
-
-    }
-
-    public void setList(List<ProductType> list){
-        this.list = list;
-    }
-
-    public TextView getTextView() {
-        return textView;
-    }
-
-    public void setTextView(TextView textView) {
-        this.textView = textView;
-    }
-
-    public ImageView getImageView() {
-        return imageView;
-    }
-
-    public void setImageView(ImageView imageView) {
-        this.imageView = imageView;
     }
 
     @Override
-    public void onClick(View v) {
-        this.mComminication.onClickImage(getAdapterPosition(), list.get(getAdapterPosition()));
+    public void initData(ProductType data) {
+        super.initData(data);
+        textView.setText(data.getTypeName());
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

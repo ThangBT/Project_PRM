@@ -44,7 +44,9 @@ public class HomeFragment extends Fragment {
         list.add(new ProductType("", "Đồ điện tử"));
         list.add(new ProductType("", "Thú cưng"));
 
-        ProductTypeAdapter adapter = new ProductTypeAdapter(this.getContext(),list, communication);
+        ProductTypeAdapter adapter = new ProductTypeAdapter(this.getContext(),list);
+        adapter.setOnItemClickListener(communication);
+
         layoutManager = new GridLayoutManager(homeView.getContext(), 2);
 
         recyclerView.setLayoutManager(layoutManager);
