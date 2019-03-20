@@ -3,7 +3,7 @@
         android:id="@+id/card_view"
         android:layout_width="205dp"
         android:layout_height="140dp"
-        card_view:cardBackgroundColor="@color/tabIndicator_color"
+        card_view:cardBackgroundColor="@color/on_sell_item"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true"
