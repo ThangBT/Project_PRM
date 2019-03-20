@@ -21,7 +21,7 @@ import com.example.buith.project_prm.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryFragment extends Fragment {
+public class HistoryFragment extends BaseFragment {
     View historyView;
     private RecyclerView.LayoutManager layoutManager;
     public HistoryFragment() {
@@ -52,4 +52,8 @@ public class HistoryFragment extends Fragment {
     }
 
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
 }

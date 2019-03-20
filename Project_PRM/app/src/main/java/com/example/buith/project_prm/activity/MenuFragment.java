@@ -13,7 +13,7 @@ import android.widget.Button;
 
 import com.example.buith.project_prm.R;
 
-public class MenuFragment extends Fragment {
+public class MenuFragment extends BaseFragment {
     View menu;
 
     public MenuFragment() {
@@ -44,4 +44,8 @@ public class MenuFragment extends Fragment {
     }
 
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
 }

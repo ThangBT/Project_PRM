@@ -20,7 +20,7 @@ import com.example.buith.project_prm.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OnSellFragement extends Fragment {
+public class OnSellFragement extends BaseFragment {
 
     private View view;
 
@@ -58,4 +58,8 @@ public class OnSellFragement extends Fragment {
         }
     };
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
 }

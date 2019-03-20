@@ -23,8 +23,10 @@ import com.example.buith.project_prm.model.ProductType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
+
     View homeView;
+    Boolean isBackStack = false;
     private RecyclerView.LayoutManager layoutManager;
     public HomeFragment() {
     }
@@ -62,6 +64,13 @@ public class HomeFragment extends Fragment {
             if (homeActivity != null) {
                 homeActivity.replaceFragment(new ProductsFragment());
             }
+//            getChildFragmentManager().beginTransaction().replace(R.id.home_container, new ProductsFragment())
+//                    .addToBackStack(null).commit();
         }
     };
+
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
 }

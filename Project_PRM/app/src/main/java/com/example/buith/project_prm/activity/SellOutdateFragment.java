@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SellOutdateFragment extends Fragment {
+public class SellOutdateFragment extends BaseFragment {
 
     private RecyclerView.LayoutManager layoutManager;
 
@@ -58,4 +58,8 @@ public class SellOutdateFragment extends Fragment {
         }
     };
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
 }

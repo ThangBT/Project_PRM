@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.buith.project_prm.R;
 
-public class HomeContainerFragment extends Fragment {
+public class HomeContainerFragment extends BaseFragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -36,6 +36,7 @@ public class HomeContainerFragment extends Fragment {
         adapter.addFragment(new HistoryFragment());
         adapter.addFragment(new MenuFragment());
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(viewPager);
         TabLayout.Tab tabHome = tabLayout.getTabAt(0);
         tabHome.setIcon(R.drawable.home);
@@ -43,5 +44,11 @@ public class HomeContainerFragment extends Fragment {
         tabHis.setIcon(R.drawable.document);
         TabLayout.Tab tabMenu = tabLayout.getTabAt(2);
         tabMenu.setIcon(R.drawable.menu);
+    }
+
+
+    @Override
+    public boolean onBackPressed() {
+        return false;
     }
 }
