@@ -2,8 +2,12 @@ package com.example.buith.project_prm.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONObject;
 
-public class Product {
+import java.io.Serializable;
+
+
+public class Product implements Serializable {
     @SerializedName("productID")
     private String productId;
     @SerializedName("productName")
@@ -38,6 +42,12 @@ public class Product {
         this.productName = productName;
         this.typeId = typeId;
         this.price = price;
+    }
+
+    public Product(String productName, Integer price, String adressSale) {
+        this.productName = productName;
+        this.price = price;
+        this.adressSale = adressSale;
     }
 
     public Product(String productId, String productName, String userNameSeller, String typeId, Integer price, Integer status, String description, String imageId, String ratting, String adressSale, Integer priority, Integer numberOfDaysPriority, Integer numberOfLike) {
@@ -159,4 +169,6 @@ public class Product {
     public void setNumberOfLike(Integer numberOfLike) {
         this.numberOfLike = numberOfLike;
     }
+
+
 }

@@ -62,10 +62,8 @@ public class HomeFragment extends BaseFragment {
         public void onClickImage(int position, Object args) {
             HomeActivity homeActivity = (HomeActivity) getActivity();
             if (homeActivity != null) {
-                homeActivity.replaceFragment(new ProductsFragment());
+                homeActivity.replaceFragment(new ProductsFragment(), args);
             }
-//            getChildFragmentManager().beginTransaction().replace(R.id.home_container, new ProductsFragment())
-//                    .addToBackStack(null).commit();
         }
     };
 

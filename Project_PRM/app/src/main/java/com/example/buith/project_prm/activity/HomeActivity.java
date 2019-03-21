@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
+import com.example.buith.project_prm.model.Product;
+import com.example.buith.project_prm.model.ProductType;
 
 import java.util.List;
 
@@ -22,14 +24,16 @@ public class HomeActivity extends BaseActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.flContainer, new HomeContainerFragment(),
-                "homeFrag")
+                        "homeFrag")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
     }
 
-    public void replaceFragment(Fragment fragmentB) {
-
+    public void replaceFragment(Fragment fragmentB, Object args) {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        if(args != null){
+            Toast.makeText(this.getApplicationContext(), ((ProductType) args).getTypeName(), Toast.LENGTH_SHORT).show();
+        }
 
         for (Fragment fragment : fragmentManager.getFragments()) {
             if (fragment != null) {
@@ -44,8 +48,15 @@ public class HomeActivity extends BaseActivity {
                 .commit();
     }
 
-    public void createSellPost(View view){
-        Intent intent = new Intent(this.getApplicationContext(), SellProductActivity.class);
+    public void moveToActivity(Product product){
+//        Toast.makeText(this.getApplicationContext(), product.getProductName(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, SellProductActivity.class);
+        intent.putExtra("Product", product);
+        startActivity(intent);
+    }
+
+    public void createSellPost(View view) {
+        Intent intent = new Intent(this.getApplicationContext(), AddSellProduct.class);
         startActivity(intent);
     }
 
@@ -59,23 +70,12 @@ public class HomeActivity extends BaseActivity {
             if (fragment != null) {
                 fragmentManager.beginTransaction().remove(fragment).commit();
             }
-//            if (fragment instanceof BaseFragment) {
-//                handled = ((BaseFragment)fragment).onBackPressed();
-//
-//                if (!handled) {
-//                    break;
-//                }
-//            }
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flContainer, new HomeContainerFragment(), "homeFrag")
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .commit();
         }
-
-//        if (!handled) {
-//            super.onBackPressed();
-//        }
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.flContainer, new HomeContainerFragment(),"homeFrag")
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .commit();
     }
 }
