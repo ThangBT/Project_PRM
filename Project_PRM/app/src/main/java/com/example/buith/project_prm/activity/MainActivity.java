@@ -2,6 +2,7 @@ package com.example.buith.project_prm.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.StrictMode;
@@ -12,10 +13,12 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.model.Account;
+import com.example.buith.project_prm.model.Token;
 import com.example.buith.project_prm.service.LoginService;
 import com.example.buith.project_prm.network.RetrofitInstance;
 import com.example.buith.project_prm.utils.Define;
@@ -36,6 +39,8 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,33 +81,43 @@ public class MainActivity extends BaseActivity {
     }
 
     public void login(View view){
-//        LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
-//        Call<Object> call = loginService.login();
-//        Log.wtf("URL Called", call.request().url() + "");
-//
-//        if(isNetworkAvailable()){
-//            showLoading();
-//            call.enqueue(new Callback<Object>() {
-//                @Override
-//                public void onResponse(Call<Object> call, Response<Object> response) {
-//                    //Account ac = response.body();
-//                    hideLoading();
-//                    Toast.makeText(MainActivity.this, "Welcome ", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                @Override
-//                public void onFailure(Call<Object> call, Throwable t) {
-//                    hideLoading();
-//                    Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }else{
-//            hideLoading();
-//            Toast.makeText(MainActivity.this, Define.NO_INTERNET, Toast.LENGTH_SHORT).show();
-//        }
+        EditText username = findViewById(R.id.etUsername);
+        EditText password = findViewById(R.id.etPassword);
+        Map<String,String> map = new HashMap<>();
+        map.put("username", username.getText().toString());
+        map.put("password", password.getText().toString());
+        map.put("grant_type", "password");
+        LoginService loginService = RetrofitInstance.getRetrofitInstance();
+        Call<Token> call = loginService.login(map);
+        if(isNetworkAvailable()){
+            showLoading();
+            call.enqueue(new Callback<Token>() {
+                @Override
+                public void onResponse(Call<Token> call, Response<Token> response) {
+                    //Account ac = response.body();
+                    Token token = response.body();
+                    hideLoading();
+                    if(token != null){
+                        Toast.makeText(MainActivity.this, ""+token.getAccess_token(), Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+//                        startActivity(intent);
+                    }else{
+                        Toast.makeText(MainActivity.this, "Null", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        startActivity(intent);
+                @Override
+                public void onFailure(Call<Token> call, Throwable t) {
+                    hideLoading();
+                    Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            hideLoading();
+            Toast.makeText(MainActivity.this, Define.NO_INTERNET, Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     //Login facebook with permisstion
