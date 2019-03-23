@@ -1,5 +1,6 @@
 package com.example.buith.project_prm.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -54,7 +55,9 @@ public class OnSellFragement extends BaseFragment {
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
         public void onClickImage(int position, Object args) {
-
+            Intent intent = new Intent(view.getContext(), AddSellProduct.class);
+            Bundle bundle = new Bundle();
+            startActivity(intent);
         }
     };
 

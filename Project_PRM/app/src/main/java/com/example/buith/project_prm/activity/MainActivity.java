@@ -7,7 +7,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -17,21 +16,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
+import com.example.buith.project_prm.constant.Constant;
 import com.example.buith.project_prm.model.Account;
 import com.example.buith.project_prm.model.Token;
-import com.example.buith.project_prm.service.LoginService;
+import com.example.buith.project_prm.service.ApiClient;
 import com.example.buith.project_prm.network.RetrofitInstance;
 import com.example.buith.project_prm.utils.Define;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -87,20 +86,26 @@ public class MainActivity extends BaseActivity {
         map.put("username", username.getText().toString());
         map.put("password", password.getText().toString());
         map.put("grant_type", "password");
-        LoginService loginService = RetrofitInstance.getRetrofitInstance();
+        ApiClient loginService = RetrofitInstance.getRetrofitInstance(this);
         Call<Token> call = loginService.login(map);
         if(isNetworkAvailable()){
             showLoading();
             call.enqueue(new Callback<Token>() {
                 @Override
                 public void onResponse(Call<Token> call, Response<Token> response) {
-                    //Account ac = response.body();
                     Token token = response.body();
+                    Account ac = token.getAccount();
                     hideLoading();
-                    if(token != null){
-                        Toast.makeText(MainActivity.this, ""+token.getAccess_token(), Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-//                        startActivity(intent);
+                    if(ac != null){
+                        SharedPreferences pref = getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, MODE_PRIVATE);
+                        SharedPreferences.Editor prefEdit = pref.edit();
+                        Gson gson = new Gson();
+                        String json = gson.toJson(ac);
+                        prefEdit.putString(Constant.KeySharedPreference.USER_KEY_LOGIN, json);
+                        prefEdit.putString(Constant.KeySharedPreference.ACCESS_TOKEN, token.getAccess_token());
+                        prefEdit.commit();
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(intent);
                     }else{
                         Toast.makeText(MainActivity.this, "Null", Toast.LENGTH_SHORT).show();
                     }

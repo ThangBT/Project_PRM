@@ -15,6 +15,10 @@ public class Token implements Serializable {
     private String refresh_token;
     @SerializedName("scope")
     private String scope;
+    @SerializedName("data")
+    private Account account;
+
+
 
     public Token() {
     }
@@ -56,5 +60,12 @@ public class Token implements Serializable {
 
     public void setScope(String scope) {
         this.scope = scope;
+    }
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

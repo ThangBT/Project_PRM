@@ -20,6 +20,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -27,7 +28,10 @@ public class HomeActivity extends BaseActivity {
                         "homeFrag")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .commit();
+
     }
+
+
 
     public void replaceFragment(Fragment fragmentB, Object args) {
         FragmentManager fragmentManager = getSupportFragmentManager();
