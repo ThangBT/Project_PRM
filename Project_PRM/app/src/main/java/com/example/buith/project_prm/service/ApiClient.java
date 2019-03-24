@@ -50,5 +50,5 @@ public interface ApiClient {
 
     // API thêm sản phẩm
     @POST("api/product")
-    Call<ProductResponse> addProduct(@Body Product p, @Header("Bearer") String token);
+    Call<ProductResponse> addProduct(@Body Product p, @Header("Authorization") String token);
 }

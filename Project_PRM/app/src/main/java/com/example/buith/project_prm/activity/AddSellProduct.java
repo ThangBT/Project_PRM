@@ -89,21 +89,6 @@ public class AddSellProduct extends AppCompatActivity {
 
         getProductType();
         getAddress();
-//    //  assign type product to adapter
-//    ArrayAdapter<CharSequence> adapterProType = ArrayAdapter.createFromResource(this,
-//            R.array.typeProduct, android.R.layout.simple_spinner_item);
-//    //  set list type to spinner
-//    adapterProType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//    spProductType.setAdapter(adapterProType);
-////        spProductType.setOnItemSelectedListener(this);
-
-        //  assign address to adapter
-//        ArrayAdapter<CharSequence> adapterAdress = ArrayAdapter.createFromResource(this,
-//                R.array.address, android.R.layout.simple_spinner_item);
-//        //  set list address to spinner
-//        adapterAdress.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spAddress.setAdapter(adapterAdress);
-//        spAddress.setOnItemSelectedListener(this);
 
         imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
                 "://" + getApplicationContext().getResources().getResourcePackageName(R.drawable.user_avatar)
@@ -209,7 +194,7 @@ public class AddSellProduct extends AppCompatActivity {
 
             SharedPreferences pref = getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, MODE_PRIVATE);
             String token = pref.getString(Constant.KeySharedPreference.ACCESS_TOKEN, null);
-            Call<ProductResponse> call = apiClient.addProduct(p, token);
+            Call<ProductResponse> call = apiClient.addProduct(p, "bearer " + token);
             call.enqueue(new Callback<ProductResponse>() {
                 @Override
                 public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
