@@ -2,6 +2,7 @@ package com.example.buith.project_prm.service;
 
 import com.example.buith.project_prm.model.Account;
 import com.example.buith.project_prm.model.AddressResponse;
+import com.example.buith.project_prm.model.Product;
 import com.example.buith.project_prm.model.ProductResponse;
 import com.example.buith.project_prm.model.ProductType;
 import com.example.buith.project_prm.model.ProductTypeResponse;
@@ -17,6 +18,7 @@ import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -34,7 +36,6 @@ public interface ApiClient {
     @GET("api/public/productTypes")
     Call<ProductTypeResponse> getProductTypes();
 
-
     // API đăng ký tài khoản
     @POST("api/public/reg")
     Call<RegisterResponse> register(@Body Account ac);
@@ -47,4 +48,7 @@ public interface ApiClient {
     @GET("api/public/address")
     Call<AddressResponse> getAllAddress();
 
+    // API thêm sản phẩm
+    @POST("api/product")
+    Call<ProductResponse> addProduct(@Body Product p, @Header("Bearer") String token);
 }
