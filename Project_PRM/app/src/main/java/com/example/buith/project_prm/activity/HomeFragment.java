@@ -11,21 +11,16 @@ import android.view.ViewGroup;
 
 import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.adapter.ProductTypeAdapter;
+import com.example.buith.project_prm.constant.Constant;
 import com.example.buith.project_prm.model.FragmentCommunication;
 import com.example.buith.project_prm.model.ProductType;
-import com.example.buith.project_prm.network.RetrofitInstance;
-import com.example.buith.project_prm.service.ApiClient;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-import retrofit2.Call;
-
 public class HomeFragment extends BaseFragment {
-
     View homeView;
-    Boolean isBackStack = false;
     private RecyclerView.LayoutManager layoutManager;
     public HomeFragment() {
     }
@@ -35,23 +30,9 @@ public class HomeFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         homeView = getView() != null ? getView() : inflater.inflate(R.layout.home_fragment, container, false);
         RecyclerView recyclerView = homeView.findViewById(R.id.my_recycler_view);
-       // recyclerView.setHasFixedSize(true);
- //       List<ProductType> list = new ArrayList<>();
-//        list.add(new ProductType("", "Thực phẩm"));
-////        list.add(new ProductType("", "Bất động sản"));
-////        list.add(new ProductType("", "Ô tô, xe máy"));
-////        list.add(new ProductType("", "Làm đẹp"));
-////        list.add(new ProductType("", "Ngoại thất, đồ gia dụng"));
-////        list.add(new ProductType("", "Đồ điện tử"));
-////        list.add(new ProductType("", "Thú cưng"));
-        String listjson = getArguments().getString("listProductType");
+        String listjson = getArguments().getString(Constant.API.LIST_PRODUCT_TYPE);
         Gson json = new Gson();
         List<ProductType> list = json.fromJson(listjson, new TypeToken<List<ProductType>>(){}.getType());
-
-        ApiClient apiClient = RetrofitInstance.getRetrofitInstance(homeView.getContext());
-        Call<List<ProductType>> call = apiClient.getProductTypes();
-
-
         ProductTypeAdapter adapter = new ProductTypeAdapter(this.getContext(),list);
         adapter.setOnItemClickListener(communication);
 

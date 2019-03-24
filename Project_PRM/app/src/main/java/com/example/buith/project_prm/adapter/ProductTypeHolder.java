@@ -13,6 +13,7 @@ import com.example.buith.project_prm.activity.HomeActivity;
 import com.example.buith.project_prm.activity.ProductsFragment;
 import com.example.buith.project_prm.model.FragmentCommunication;
 import com.example.buith.project_prm.model.ProductType;
+import com.example.buith.project_prm.utils.ImageUtils;
 
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class ProductTypeHolder extends BaseHolder<ProductType> {
     public void initData(ProductType data) {
         super.initData(data);
         textView.setText(data.getTypeName());
+        imageView.setImageBitmap(ImageUtils.base64ToBitmap(data.getTypeImage()));
     }
 
 }

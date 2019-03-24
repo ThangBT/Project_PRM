@@ -36,12 +36,12 @@ public class OnSellFragement extends BaseFragment {
         view = inflater.inflate(R.layout.on_sell_fragment, container, false);
 
         List<Product> list = new ArrayList<>();
-        list.add(new Product("Cuong", "Bat dong san", 200));
-        list.add(new Product("Cuong1", "Bat dong san", 200));
-        list.add(new Product("Cuong", "Bat dong san", 200));
-        list.add(new Product("Cuong1", "Bat dong san", 200));
-        list.add(new Product("Cuong", "Bat dong san", 200));
-        list.add(new Product("Cuong1", "Bat dong san", 200));
+//        list.add(new Product("Cuong", "Bat dong san", 200));
+//        list.add(new Product("Cuong1", "Bat dong san", 200));
+//        list.add(new Product("Cuong", "Bat dong san", 200));
+//        list.add(new Product("Cuong1", "Bat dong san", 200));
+//        list.add(new Product("Cuong", "Bat dong san", 200));
+//        list.add(new Product("Cuong1", "Bat dong san", 200));
         RecyclerView recyclerView = view.findViewById(R.id.recycleview_on_sell);
         OnSellAdapter adapter = new OnSellAdapter(this.getContext(),list);
         adapter.setOnItemClickListener(communication);

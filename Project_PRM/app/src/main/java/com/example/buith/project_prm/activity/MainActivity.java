@@ -94,9 +94,9 @@ public class MainActivity extends BaseActivity {
                 @Override
                 public void onResponse(Call<Token> call, Response<Token> response) {
                     Token token = response.body();
-                    Account ac = token.getAccount();
                     hideLoading();
-                    if(ac != null){
+                    if(token != null){
+                        Account ac = token.getAccount();
                         SharedPreferences pref = getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, MODE_PRIVATE);
                         SharedPreferences.Editor prefEdit = pref.edit();
                         Gson gson = new Gson();
@@ -107,7 +107,7 @@ public class MainActivity extends BaseActivity {
                         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                     }else{
-                        Toast.makeText(MainActivity.this, "Null", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, Constant.Message.ERROR_LOGIN_RESPONSE_API, Toast.LENGTH_SHORT).show();
                     }
                 }
 

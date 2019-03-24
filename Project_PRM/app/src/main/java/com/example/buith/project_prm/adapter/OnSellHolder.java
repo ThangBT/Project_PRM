@@ -26,7 +26,7 @@ public class OnSellHolder extends BaseHolder<Product> {
     public void initData(Product data) {
         super.initData(data);
         productName.setText(data.getProductName());
-        typeId.setText(data.getTypeId());
+        typeId.setText(data.getTypeID());
         price.setText(data.getPrice().toString());
     }
 }

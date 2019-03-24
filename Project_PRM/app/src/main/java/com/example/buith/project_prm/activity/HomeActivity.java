@@ -1,26 +1,32 @@
 package com.example.buith.project_prm.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
+import com.example.buith.project_prm.constant.Constant;
 import com.example.buith.project_prm.model.Product;
 import com.example.buith.project_prm.model.ProductType;
 
-import java.util.List;
 
 public class HomeActivity extends BaseActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_home);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -32,11 +38,15 @@ public class HomeActivity extends BaseActivity {
     }
 
 
-
     public void replaceFragment(Fragment fragmentB, Object args) {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        Bundle bundle = new Bundle();
         if(args != null){
             Toast.makeText(this.getApplicationContext(), ((ProductType) args).getTypeName(), Toast.LENGTH_SHORT).show();
+            if(args instanceof ProductType) {
+                bundle.putInt(Constant.PRODUCT_TYPE_ID, ((ProductType) args).getTypeId());
+                fragmentB.setArguments(bundle);
+            }
         }
 
         for (Fragment fragment : fragmentManager.getFragments()) {

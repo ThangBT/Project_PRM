@@ -28,7 +28,7 @@ public class RetrofitInstance {
 
             Request request = original.newBuilder()
                     .addHeader("Content-Type", "application/json")
-                    .addHeader("Authorization", accessToken)
+
                     .method(original.method(), original.body())
                     .build();
 

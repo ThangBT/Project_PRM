@@ -121,4 +121,7 @@ public class Account implements Serializable {
         this.money = money;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
 }

@@ -5,73 +5,71 @@ import com.google.gson.annotations.SerializedName;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 public class Product implements Serializable {
     @SerializedName("productID")
-    private String productId;
+    private int productID;
     @SerializedName("productName")
     private String productName;
-    @SerializedName("userNameSeller")
-    private String userNameSeller;
     @SerializedName("typeID")
-    private String typeId;
+    private int typeID;
     @SerializedName("price")
-    private Integer price;
-    @SerializedName("status")
-    private Integer status;
+    private Long price;
+    @SerializedName("userName")
+    private String userName;
     @SerializedName("description")
     private String description;
-    @SerializedName("imageID")
-    private String imageId;
-    @SerializedName("ratting")
-    private String ratting;
-    @SerializedName("adressSale")
-    private String adressSale;
+    @SerializedName("image")
+    private String image;
+    @SerializedName("status")
+    private boolean status;
+    @SerializedName("addessID")
+    private int addressID;
     @SerializedName("priority")
-    private Integer priority;
+    private int priority;
     @SerializedName("numberOfDaysPriority")
-    private Integer numberOfDaysPriority;
-    @SerializedName("numberOfLike")
-    private Integer numberOfLike;
+    private int numberOfDaysPriority;
+    @SerializedName("images")
+    private List<Image> images;
 
     public Product() {
     }
 
-    public Product(String productName, String typeId, Integer price) {
+    public Product(String productName, int typeId, Long price) {
         this.productName = productName;
-        this.typeId = typeId;
+        this.typeID = typeId;
         this.price = price;
     }
 
-    public Product(String productName, Integer price, String adressSale) {
+    public Product(String productName, Long price, int adressSale) {
         this.productName = productName;
         this.price = price;
-        this.adressSale = adressSale;
+        this.addressID = adressSale;
     }
 
-    public Product(String productId, String productName, String userNameSeller, String typeId, Integer price, Integer status, String description, String imageId, String ratting, String adressSale, Integer priority, Integer numberOfDaysPriority, Integer numberOfLike) {
-        this.productId = productId;
+    public Product(int productID, String productName, int typeID, Long price, String userName, String description, String image, boolean status, int addressID, int priority, int numberOfDaysPriority, List<Image> images) {
+        this.productID = productID;
         this.productName = productName;
-        this.userNameSeller = userNameSeller;
-        this.typeId = typeId;
+        this.typeID = typeID;
         this.price = price;
-        this.status = status;
+        this.userName = userName;
         this.description = description;
-        this.imageId = imageId;
-        this.ratting = ratting;
-        this.adressSale = adressSale;
+        this.image = image;
+        this.status = status;
+        this.addressID = addressID;
         this.priority = priority;
         this.numberOfDaysPriority = numberOfDaysPriority;
-        this.numberOfLike = numberOfLike;
+        this.images = images;
     }
 
-    public String getProductId() {
-        return productId;
+    public int getProductID() {
+        return productID;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public String getProductName() {
@@ -82,36 +80,28 @@ public class Product implements Serializable {
         this.productName = productName;
     }
 
-    public String getUserNameSeller() {
-        return userNameSeller;
+    public int getTypeID() {
+        return typeID;
     }
 
-    public void setUserNameSeller(String userNameSeller) {
-        this.userNameSeller = userNameSeller;
+    public void setTypeID(int typeID) {
+        this.typeID = typeID;
     }
 
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(String typeId) {
-        this.typeId = typeId;
-    }
-
-    public Integer getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
-    public Integer getStatus() {
-        return status;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getDescription() {
@@ -122,53 +112,51 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public String getImageId() {
-        return imageId;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageId(String imageId) {
-        this.imageId = imageId;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getRatting() {
-        return ratting;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setRatting(String ratting) {
-        this.ratting = ratting;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
-    public String getAdressSale() {
-        return adressSale;
+    public int getAddressID() {
+        return addressID;
     }
 
-    public void setAdressSale(String adressSale) {
-        this.adressSale = adressSale;
+    public void setAddressID(int addressID) {
+        this.addressID = addressID;
     }
 
-    public Integer getPriority() {
+    public int getPriority() {
         return priority;
     }
 
-    public void setPriority(Integer priority) {
+    public void setPriority(int priority) {
         this.priority = priority;
     }
 
-    public Integer getNumberOfDaysPriority() {
+    public int getNumberOfDaysPriority() {
         return numberOfDaysPriority;
     }
 
-    public void setNumberOfDaysPriority(Integer numberOfDaysPriority) {
+    public void setNumberOfDaysPriority(int numberOfDaysPriority) {
         this.numberOfDaysPriority = numberOfDaysPriority;
     }
 
-    public Integer getNumberOfLike() {
-        return numberOfLike;
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setNumberOfLike(Integer numberOfLike) {
-        this.numberOfLike = numberOfLike;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
-
-
 }
