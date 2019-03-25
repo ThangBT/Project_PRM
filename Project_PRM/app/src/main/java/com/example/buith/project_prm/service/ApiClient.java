@@ -1,7 +1,9 @@
 package com.example.buith.project_prm.service;
 
 import com.example.buith.project_prm.model.Account;
+import com.example.buith.project_prm.model.AccountResponse;
 import com.example.buith.project_prm.model.AddressResponse;
+import com.example.buith.project_prm.model.ImageListResponse;
 import com.example.buith.project_prm.model.ProductResponse;
 import com.example.buith.project_prm.model.ProductType;
 import com.example.buith.project_prm.model.ProductTypeResponse;
@@ -42,6 +44,12 @@ public interface ApiClient {
     // API lấy tất cả sản phẩm theo loại sản phẩm
     @GET("api/public/productsSearch/{typeID}")
     Call<ProductResponse> getProductInType(@Path("typeID") int typeID);
+
+    @GET("api/public/productImage/{productId}")
+    Call<ImageListResponse> getListImage(@Path("productId") int productId);
+
+    @GET("api/public/user/{username}")
+    Call<AccountResponse> getSeller(@Path("username") String username);
 
     // API lấy địa chỉ
     @GET("api/public/address")

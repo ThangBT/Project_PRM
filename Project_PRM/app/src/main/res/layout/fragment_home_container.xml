@@ -17,7 +17,8 @@
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/viewHome_id"/>
+        android:id="@+id/viewHome_id"
+        android:background="@color/on_sell_item"/>
 </LinearLayout>
 
 

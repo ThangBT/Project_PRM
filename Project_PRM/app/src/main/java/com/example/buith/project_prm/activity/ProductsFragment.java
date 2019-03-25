@@ -35,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductsFragment extends BaseFragment implements OnProductLoaded {
+public class ProductsFragment extends BaseFragment implements  OnProductLoaded, AdapterView.OnItemSelectedListener {
 
     private View view;
 
@@ -157,17 +157,27 @@ public class ProductsFragment extends BaseFragment implements OnProductLoaded {
         ArrayAdapter<Address> adapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         addressDrop.setAdapter(adapter);
-//        addressDrop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
+
     }
 
 
     @Override
     public boolean onBackPressed() {
         return false;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        int spinnerId = view.getId();
+        if(spinnerId == R.id.spinner_city){
+
+        }else{
+
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Account implements Serializable {
     @SerializedName("userName")
@@ -38,10 +39,13 @@ public class Account implements Serializable {
     @SerializedName("role")
     private String role;
 
+    @SerializedName("createdDate")
+    private Date createdDate;
+
     public Account() {
     }
 
-    public Account(String username, String password, String fullname, String address, String phoneNumber, String email, String avatar, String money, String role) {
+    public Account(String username, String password, String fullname, String address, String phoneNumber, String email, String avatar, String money, String role, Date createdDate) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -51,6 +55,7 @@ public class Account implements Serializable {
         this.avatar = avatar;
         this.money = money;
         this.role = role;
+        this.createdDate = createdDate;
     }
 
     public String getUsername() {
@@ -123,5 +128,13 @@ public class Account implements Serializable {
 
     public String getAvatar() {
         return avatar;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }
