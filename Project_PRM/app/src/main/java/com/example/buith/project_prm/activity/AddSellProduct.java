@@ -194,7 +194,7 @@ public class AddSellProduct extends AppCompatActivity {
 
             SharedPreferences pref = getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, MODE_PRIVATE);
             String token = pref.getString(Constant.KeySharedPreference.ACCESS_TOKEN, null);
-            Call<ProductResponse> call = apiClient.addProduct(p, "bearer " + token);
+            Call<ProductResponse> call = apiClient.addProduct(p, "Bearer: " + token);
             call.enqueue(new Callback<ProductResponse>() {
                 @Override
                 public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
