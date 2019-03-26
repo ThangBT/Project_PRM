@@ -185,7 +185,7 @@ public class AddSellProduct extends AppCompatActivity {
             p.setAddressID(Integer.parseInt(String.valueOf(((Address) this.spAddress.getSelectedItem()).getAddressID())));
             p.setDescription(this.productDescription.getText().toString());
 
-            List<Image> listImg = new ArrayList<>();
+            ArrayList<Image> listImg = new ArrayList<>();
             for (Uri item : mArrayUri) {
                 listImg.add(new Image(0, item.toString()));
             }
