@@ -9,6 +9,9 @@ public class Constant {
 
     public static class API{
         public static final String LIST_PRODUCT_TYPE = "list_product_type";
+        public static final String STATUS_API_ERROR = "Không thể lấy dữ liệu";
+        public static final String API_FAILURE = "Có lỗi khi gọi api";
+        public static final String RESPONSE_EMPTY = "Không có phản hồi";
     }
 
     public static class Message {
@@ -22,6 +25,16 @@ public class Constant {
         public static final String SUCCESS_REGISTER_STATUS_API = "Đăng ký thành công";
         public static final String ERROR_LOGIN_RESPONSE_API = "Đăng nhập thất bại! Kiểm tra tên đăng nhập và mật khẩu";
 
+
+    }
+
+    public static class Pattern{
+        public static final String FORMAT_DATE_TIME = "dd/MM/yyyy";
+    }
+
+    public static class Intent {
+        public static final String PRODUCT = "product";
+        public static final String PRODUCT_KEY = "product_key";
     }
     public static final int RESULT_LOAD_IMAGE = 1;
     public static final String PRODUCT_TYPE_ID = "product_type_id";

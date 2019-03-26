@@ -18,6 +18,7 @@ import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.constant.Constant;
 import com.example.buith.project_prm.model.Product;
 import com.example.buith.project_prm.model.ProductType;
+import com.google.gson.Gson;
 
 
 public class HomeActivity extends BaseActivity {
@@ -27,6 +28,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setTheme(R.style.AppTheme);
         setContentView(R.layout.activity_home);
         getSupportFragmentManager()
                 .beginTransaction()
@@ -65,7 +67,8 @@ public class HomeActivity extends BaseActivity {
     public void moveToActivity(Product product){
 //        Toast.makeText(this.getApplicationContext(), product.getProductName(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, SellProductActivity.class);
-        intent.putExtra("Product", product);
+
+        intent.putExtra(Constant.Intent.PRODUCT_KEY, product);
         startActivity(intent);
     }
 

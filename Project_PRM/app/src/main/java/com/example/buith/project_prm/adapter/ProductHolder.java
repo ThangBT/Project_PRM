@@ -40,7 +40,7 @@ public class ProductHolder extends BaseHolder<Product> {
         productName.setText(data.getProductName());
         productPrice.setText(StringUtils.formatMoney(data.getPrice()));
         productImage.setImageBitmap(ImageUtils.base64ToBitmap(data.getImage()));
-        //addressSell.setText(data.getAdressSale());
+        addressSell.setText(data.getAddress());
         topImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
