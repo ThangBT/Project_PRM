@@ -61,55 +61,55 @@ public class AddSellProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_sell_product);
-        Toolbar toolbar = findViewById(R.id.toolbar_add);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        Toolbar toolbar = findViewById(R.id.toolbar_add);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        productName = findViewById(R.id.input_product_name);
-        productDescription = findViewById(R.id.input_product_description);
-        productPrice = findViewById(R.id.input_product_price);
-        spProductType = findViewById(R.id.spinnerProductType);
-        spAddress = findViewById(R.id.spinnerAddress);
-        btnAdd = findViewById(R.id.btnAdd);
-
-        //  assign type product to adapter
-        ArrayAdapter<CharSequence> adapterProType = ArrayAdapter.createFromResource(this,
-                R.array.typeProduct, android.R.layout.simple_spinner_item);
-        //  set list type to spinner
-        adapterProType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spProductType.setAdapter(adapterProType);
-//        spProductType.setOnItemSelectedListener(this);
-
-        //  assign address to adapter
-        ArrayAdapter<CharSequence> adapterAdress = ArrayAdapter.createFromResource(this,
-                R.array.address, android.R.layout.simple_spinner_item);
-        //  set list address to spinner
-        adapterAdress.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spAddress.setAdapter(adapterAdress);
-//        spAddress.setOnItemSelectedListener(this);
-
-        imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
-                "://" + getApplicationContext().getResources().getResourcePackageName(R.drawable.user_avatar)
-                + '/' + getApplicationContext().getResources().getResourceTypeName(R.drawable.user_avatar)
-                + '/' + getApplicationContext().getResources().getResourceEntryName(R.drawable.user_avatar));
-
-        mArrayUri = new ArrayList<>(Arrays.asList(imageUri));
-
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        //recyclerView.setHasFixedSize(true);
-
-        // use a grid layout manager
-        layoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-
-        // specify an adapter
-        mAdapter = new MyRecyclerAdapter(this, mArrayUri);
-        recyclerView.setAdapter(mAdapter);
+//        productName = findViewById(R.id.input_product_name);
+//        productDescription = findViewById(R.id.input_product_description);
+//        productPrice = findViewById(R.id.input_product_price);
+//        spProductType = findViewById(R.id.spinnerProductType);
+//        spAddress = findViewById(R.id.spinnerAddress);
+//        btnAdd = findViewById(R.id.btnAdd);
+//
+//        //  assign type product to adapter
+//        ArrayAdapter<CharSequence> adapterProType = ArrayAdapter.createFromResource(this,
+//                R.array.typeProduct, android.R.layout.simple_spinner_item);
+//        //  set list type to spinner
+//        adapterProType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spProductType.setAdapter(adapterProType);
+////        spProductType.setOnItemSelectedListener(this);
+//
+//        //  assign address to adapter
+//        ArrayAdapter<CharSequence> adapterAdress = ArrayAdapter.createFromResource(this,
+//                R.array.address, android.R.layout.simple_spinner_item);
+//        //  set list address to spinner
+//        adapterAdress.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spAddress.setAdapter(adapterAdress);
+////        spAddress.setOnItemSelectedListener(this);
+//
+//        imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+//                "://" + getApplicationContext().getResources().getResourcePackageName(R.drawable.user_avatar)
+//                + '/' + getApplicationContext().getResources().getResourceTypeName(R.drawable.user_avatar)
+//                + '/' + getApplicationContext().getResources().getResourceEntryName(R.drawable.user_avatar));
+//
+//        mArrayUri = new ArrayList<>(Arrays.asList(imageUri));
+//
+//        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+//
+//        // use this setting to improve performance if you know that changes
+//        // in content do not change the layout size of the RecyclerView
+//        //recyclerView.setHasFixedSize(true);
+//
+//        // use a grid layout manager
+//        layoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+//        recyclerView.setLayoutManager(layoutManager);
+//
+//        // specify an adapter
+//        mAdapter = new MyRecyclerAdapter(this, mArrayUri);
+//        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
