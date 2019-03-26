@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -29,6 +31,7 @@ import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.adapter.MyRecyclerAdapter;
 import com.example.buith.project_prm.constant.Constant;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -39,6 +42,7 @@ public class AddSellProduct extends AppCompatActivity {
 
     private EditText productName;
     private EditText productDescription;
+    private EditText productPrice;
     private Spinner spProductType;
     private Spinner spAddress;
     private Button btnAdd;
@@ -65,6 +69,7 @@ public class AddSellProduct extends AppCompatActivity {
 
         productName = findViewById(R.id.input_product_name);
         productDescription = findViewById(R.id.input_product_description);
+        productPrice = findViewById(R.id.input_product_price);
         spProductType = findViewById(R.id.spinnerProductType);
         spAddress = findViewById(R.id.spinnerAddress);
         btnAdd = findViewById(R.id.btnAdd);
@@ -98,7 +103,7 @@ public class AddSellProduct extends AppCompatActivity {
         // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
 
-        // use a linear layout manager
+        // use a grid layout manager
         layoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -128,6 +133,10 @@ public class AddSellProduct extends AppCompatActivity {
                 imagesEncodedList = new ArrayList<String>();
                 if (data.getData() != null) {
                     Uri mImageUri = data.getData();
+
+                    /*InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    selectedImage = resizedBitmap(selectedImage, 75);*/
 
                     // Get the cursor
                     Cursor cursor = getContentResolver().query(mImageUri,
@@ -186,6 +195,18 @@ public class AddSellProduct extends AppCompatActivity {
 
     public boolean checkValidData() {
         return productName.length() == 0 || productDescription.length() == 0
+                || productPrice.length() == 0
                 || mArrayUri.get(0).toString().equals(imageUri.toString());
+    }
+
+    public Bitmap resizedBitmap(Bitmap image, int maxSize) {
+        return Bitmap.createScaledBitmap(image, maxSize, maxSize, true);
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 }
