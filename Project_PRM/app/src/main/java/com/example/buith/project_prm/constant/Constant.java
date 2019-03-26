@@ -9,7 +9,9 @@ public class Constant {
 
     public static class API{
         public static final String LIST_PRODUCT_TYPE = "list_product_type";
-
+        public static final String STATUS_API_ERROR = "Không thể lấy dữ liệu";
+        public static final String API_FAILURE = "Có lỗi khi gọi api";
+        public static final String RESPONSE_EMPTY = "Không có phản hồi";
     }
 
     public static class Message {

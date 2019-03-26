@@ -11,14 +11,14 @@
         app:tabGravity="fill"
         app:tabMode="fixed"
         android:id="@+id/tabLayout_id"
-        android:background="@color/tab_background_color"
+        android:background="@color/tabLayout_color"
         app:tabIndicatorColor="@color/colorPrimary" />
 
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/viewHome_id"
-        android:background="@color/on_sell_item"/>
+        android:background="@color/viewpager_color"/>
 </LinearLayout>
 
 

@@ -7,6 +7,7 @@ import com.example.buith.project_prm.model.ImageListResponse;
 import com.example.buith.project_prm.model.ProductResponse;
 import com.example.buith.project_prm.model.ProductType;
 import com.example.buith.project_prm.model.ProductTypeResponse;
+import com.example.buith.project_prm.model.ProductUserResponse;
 import com.example.buith.project_prm.model.RegisterResponse;
 import com.example.buith.project_prm.model.Token;
 import com.example.buith.project_prm.utils.Define;
@@ -54,5 +55,9 @@ public interface ApiClient {
     // API lấy địa chỉ
     @GET("api/public/address")
     Call<AddressResponse> getAllAddress();
+
+    // API lấy sản phẩm theo username
+    @GET("api/public/user/product/{username}")
+    Call<ProductUserResponse> getProductUser(@Path("username") String username);
 
 }

@@ -16,7 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/tabLayout_color"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
@@ -24,7 +24,7 @@
             android:id="@+id/image_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="1dp"
             android:orientation="horizontal">
 
         </android.support.v7.widget.RecyclerView>
@@ -64,7 +64,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:background="@color/on_sell_item">
+            android:background="@color/viewpager_color">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
                 android:layout_width="96dp"
@@ -118,6 +118,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginLeft="8dp"
             android:text="Mô tả sản phẩm"
