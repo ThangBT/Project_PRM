@@ -42,4 +42,9 @@ public class ProductType {
     public void setTypeImage(String typeImage) {
         this.typeImage = typeImage;
     }
+
+    @Override
+    public String toString() {
+        return typeName;
+    }
 }

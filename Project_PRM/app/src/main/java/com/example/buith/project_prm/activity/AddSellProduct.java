@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -30,6 +31,17 @@ import android.widget.Toast;
 import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.adapter.MyRecyclerAdapter;
 import com.example.buith.project_prm.constant.Constant;
+import com.example.buith.project_prm.model.Account;
+import com.example.buith.project_prm.model.Address;
+import com.example.buith.project_prm.model.AddressResponse;
+import com.example.buith.project_prm.model.Image;
+import com.example.buith.project_prm.model.Product;
+import com.example.buith.project_prm.model.ProductResponse;
+import com.example.buith.project_prm.model.ProductType;
+import com.example.buith.project_prm.model.ProductTypeResponse;
+import com.example.buith.project_prm.network.RetrofitInstance;
+import com.example.buith.project_prm.service.ApiClient;
+import com.google.gson.Gson;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -37,6 +49,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddSellProduct extends AppCompatActivity {
 
@@ -57,59 +73,47 @@ public class AddSellProduct extends AppCompatActivity {
     Uri imageUri;
     ArrayList<Uri> mArrayUri;
 
+    private List<ProductType> listType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_sell_product);
-//        Toolbar toolbar = findViewById(R.id.toolbar_add);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Toolbar toolbar = findViewById(R.id.toolbar_add);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-//        productName = findViewById(R.id.input_product_name);
-//        productDescription = findViewById(R.id.input_product_description);
-//        productPrice = findViewById(R.id.input_product_price);
-//        spProductType = findViewById(R.id.spinnerProductType);
-//        spAddress = findViewById(R.id.spinnerAddress);
-//        btnAdd = findViewById(R.id.btnAdd);
-//
-//        //  assign type product to adapter
-//        ArrayAdapter<CharSequence> adapterProType = ArrayAdapter.createFromResource(this,
-//                R.array.typeProduct, android.R.layout.simple_spinner_item);
-//        //  set list type to spinner
-//        adapterProType.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spProductType.setAdapter(adapterProType);
-////        spProductType.setOnItemSelectedListener(this);
-//
-//        //  assign address to adapter
-//        ArrayAdapter<CharSequence> adapterAdress = ArrayAdapter.createFromResource(this,
-//                R.array.address, android.R.layout.simple_spinner_item);
-//        //  set list address to spinner
-//        adapterAdress.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spAddress.setAdapter(adapterAdress);
-////        spAddress.setOnItemSelectedListener(this);
-//
-//        imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
-//                "://" + getApplicationContext().getResources().getResourcePackageName(R.drawable.user_avatar)
-//                + '/' + getApplicationContext().getResources().getResourceTypeName(R.drawable.user_avatar)
-//                + '/' + getApplicationContext().getResources().getResourceEntryName(R.drawable.user_avatar));
-//
-//        mArrayUri = new ArrayList<>(Arrays.asList(imageUri));
-//
-//        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-//
-//        // use this setting to improve performance if you know that changes
-//        // in content do not change the layout size of the RecyclerView
-//        //recyclerView.setHasFixedSize(true);
-//
-//        // use a grid layout manager
-//        layoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
-//        recyclerView.setLayoutManager(layoutManager);
-//
-//        // specify an adapter
-//        mAdapter = new MyRecyclerAdapter(this, mArrayUri);
-//        recyclerView.setAdapter(mAdapter);
+        productName = findViewById(R.id.input_product_name);
+        productDescription = findViewById(R.id.input_product_description);
+        spProductType = findViewById(R.id.spinnerProductType);
+        spAddress = findViewById(R.id.spinnerAddress);
+        btnAdd = findViewById(R.id.btnAdd);
+
+        getProductType();
+        getAddress();
+
+        imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+                "://" + getApplicationContext().getResources().getResourcePackageName(R.drawable.user_avatar)
+                + '/' + getApplicationContext().getResources().getResourceTypeName(R.drawable.user_avatar)
+                + '/' + getApplicationContext().getResources().getResourceEntryName(R.drawable.user_avatar));
+
+        mArrayUri = new ArrayList<>(Arrays.asList(imageUri));
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        //recyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        layoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter
+        mAdapter = new MyRecyclerAdapter(this, mArrayUri);
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -182,7 +186,45 @@ public class AddSellProduct extends AppCompatActivity {
 
     public void addProduct(View view) {
         if (!checkValidData()) {
+            Product p = new Product();
+            p.setProductName(this.productName.getText().toString());
+            p.setDescription(this.productDescription.getText().toString());
+            p.setTypeID(Integer.parseInt(String.valueOf(((ProductType) this.spProductType.getSelectedItem()).getTypeId())));
+            p.setAddressID(Integer.parseInt(String.valueOf(((Address) this.spAddress.getSelectedItem()).getAddressID())));
+            p.setDescription(this.productDescription.getText().toString());
 
+            ArrayList<Image> listImg = new ArrayList<>();
+            for (Uri item : mArrayUri) {
+                listImg.add(new Image(0, item.toString()));
+            }
+            p.setImages(listImg);
+            p.setPrice((long)150000);
+            ApiClient apiClient = RetrofitInstance.getRetrofitInstance(getApplicationContext());
+
+            SharedPreferences pref = getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, MODE_PRIVATE);
+            String token = pref.getString(Constant.KeySharedPreference.ACCESS_TOKEN, null);
+            Call<ProductResponse> call = apiClient.addProduct(p, "bearer " + token);
+            call.enqueue(new Callback<ProductResponse>() {
+                @Override
+                public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                    ProductResponse response1 = response.body();
+                    if (response1 == null) {
+                        Toast.makeText(getApplicationContext(), "Xảy ra lỗi khi thêm mới sản phẩm", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (response1.getStatus() == 1) {
+                            Toast.makeText(getApplicationContext(), "Thêm mới sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Xảy ra lỗi khi thêm mới sản phẩm", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ProductResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Alert");
@@ -199,6 +241,7 @@ public class AddSellProduct extends AppCompatActivity {
                 || mArrayUri.get(0).toString().equals(imageUri.toString());
     }
 
+
     public Bitmap resizedBitmap(Bitmap image, int maxSize) {
         return Bitmap.createScaledBitmap(image, maxSize, maxSize, true);
     }
@@ -208,5 +251,66 @@ public class AddSellProduct extends AppCompatActivity {
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
+    }
+
+    public void getProductType() {
+        ApiClient apiClient = RetrofitInstance.getRetrofitInstance(getApplicationContext());
+        Call<ProductTypeResponse> call = apiClient.getProductTypes();
+        call.enqueue(new Callback<ProductTypeResponse>() {
+            @Override
+            public void onResponse(Call<ProductTypeResponse> call, Response<ProductTypeResponse> response) {
+                ProductTypeResponse response1 = response.body();
+                if (response1 == null) {
+                    Toast.makeText(getApplicationContext(), "Không load được dữ liệu loại sản phẩm", Toast.LENGTH_SHORT).show();
+                } else {
+                    List<ProductType> list = response1.getListProductType();
+                    loadType(list);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductTypeResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void loadType(List<ProductType> list) {
+        ArrayAdapter<ProductType> adapter =
+                new ArrayAdapter<ProductType>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spProductType.setAdapter(adapter);
+        spProductType.setSelection(0);
+    }
+
+    public void getAddress() {
+        ApiClient apiClient = RetrofitInstance.getRetrofitInstance(getApplicationContext());
+        Call<AddressResponse> call = apiClient.getAllAddress();
+        call.enqueue(new Callback<AddressResponse>() {
+            @Override
+            public void onResponse(Call<AddressResponse> call, Response<AddressResponse> response) {
+                AddressResponse response1 = response.body();
+                if (response1 == null) {
+                    Toast.makeText(getApplicationContext(), "Không load được dữ liệu loại địa chỉ", Toast.LENGTH_SHORT).show();
+                } else {
+                    List<Address> list = response1.getList();
+                    loadAddress(list);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddressResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    public void loadAddress(List<Address> list) {
+        ArrayAdapter<Address> adapter =
+                new ArrayAdapter<Address>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spAddress.setAdapter(adapter);
+        spAddress.setSelection(0);
     }
 }

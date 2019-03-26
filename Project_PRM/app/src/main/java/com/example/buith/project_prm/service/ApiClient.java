@@ -3,6 +3,7 @@ package com.example.buith.project_prm.service;
 import com.example.buith.project_prm.model.Account;
 import com.example.buith.project_prm.model.AccountResponse;
 import com.example.buith.project_prm.model.AddressResponse;
+import com.example.buith.project_prm.model.Product;
 import com.example.buith.project_prm.model.ImageListResponse;
 import com.example.buith.project_prm.model.ProductResponse;
 import com.example.buith.project_prm.model.ProductType;
@@ -20,6 +21,7 @@ import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -36,7 +38,6 @@ public interface ApiClient {
 
     @GET("api/public/productTypes")
     Call<ProductTypeResponse> getProductTypes();
-
 
     // API đăng ký tài khoản
     @POST("api/public/reg")
@@ -56,6 +57,9 @@ public interface ApiClient {
     @GET("api/public/address")
     Call<AddressResponse> getAllAddress();
 
+    // API thêm sản phẩm
+    @POST("api/product")
+    Call<ProductResponse> addProduct(@Body Product p, @Header("Authorization") String token);
     // API lấy sản phẩm theo username
     @GET("api/public/user/product/{username}")
     Call<ProductUserResponse> getProductUser(@Path("username") String username);
