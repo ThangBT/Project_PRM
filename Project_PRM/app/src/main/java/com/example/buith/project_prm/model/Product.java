@@ -25,7 +25,7 @@ public class Product implements Serializable {
     private String image;
     @SerializedName("status")
     private boolean status;
-    @SerializedName("addessID")
+    @SerializedName("addressID")
     private int addressID;
     @SerializedName("priority")
     private int priority;

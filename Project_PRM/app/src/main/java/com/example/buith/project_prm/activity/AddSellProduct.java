@@ -190,6 +190,7 @@ public class AddSellProduct extends AppCompatActivity {
                 listImg.add(new Image(0, item.toString()));
             }
             p.setImages(listImg);
+            p.setPrice((long)150000);
             ApiClient apiClient = RetrofitInstance.getRetrofitInstance(getApplicationContext());
 
             SharedPreferences pref = getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, MODE_PRIVATE);
