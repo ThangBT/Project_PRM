@@ -18,4 +18,12 @@ public class ProductResponse {
     public void setProductList(ArrayList<Product> productList) {
         this.productList = productList;
     }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 }

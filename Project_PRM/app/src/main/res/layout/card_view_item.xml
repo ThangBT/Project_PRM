@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
     <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        card_view:cardBackgroundColor="@color/on_sell_item"
+        card_view:cardBackgroundColor="@color/tabLayout_color"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="5dp"
         card_view:cardUseCompatPadding="true"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+        >
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -18,7 +20,9 @@
                 android:id="@+id/product_type_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/logout" />
+                android:src="@drawable/logout"
+                android:scaleType="centerCrop"
+                />
 
             <TextView
                 android:id="@+id/product_type_name"
@@ -26,8 +30,9 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="Product"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20dp" />
+                android:textColor="@color/text_title"
+                android:textSize="30dp"
+                />
         </FrameLayout>
     </android.support.v7.widget.CardView>
 

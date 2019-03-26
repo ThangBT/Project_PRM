@@ -2,33 +2,35 @@ package com.example.buith.project_prm.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
+import com.example.buith.project_prm.constant.Constant;
 import com.example.buith.project_prm.model.Account;
-import com.example.buith.project_prm.service.LoginService;
+import com.example.buith.project_prm.model.Token;
+import com.example.buith.project_prm.service.ApiClient;
 import com.example.buith.project_prm.network.RetrofitInstance;
 import com.example.buith.project_prm.utils.Define;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
@@ -36,6 +38,8 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,33 +80,49 @@ public class MainActivity extends BaseActivity {
     }
 
     public void login(View view){
-//        LoginService loginService = RetrofitInstance.getRetrofitInstance().create(LoginService.class);
-//        Call<Object> call = loginService.login();
-//        Log.wtf("URL Called", call.request().url() + "");
-//
-//        if(isNetworkAvailable()){
-//            showLoading();
-//            call.enqueue(new Callback<Object>() {
-//                @Override
-//                public void onResponse(Call<Object> call, Response<Object> response) {
-//                    //Account ac = response.body();
-//                    hideLoading();
-//                    Toast.makeText(MainActivity.this, "Welcome ", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                @Override
-//                public void onFailure(Call<Object> call, Throwable t) {
-//                    hideLoading();
-//                    Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//        }else{
-//            hideLoading();
-//            Toast.makeText(MainActivity.this, Define.NO_INTERNET, Toast.LENGTH_SHORT).show();
-//        }
+        EditText username = findViewById(R.id.etUsername);
+        EditText password = findViewById(R.id.etPassword);
+        Map<String,String> map = new HashMap<>();
+        map.put("username", username.getText().toString());
+        map.put("password", password.getText().toString());
+        map.put("grant_type", "password");
+        ApiClient loginService = RetrofitInstance.getRetrofitInstance(this);
+        Call<Token> call = loginService.login(map);
+        if(isNetworkAvailable()){
+            showLoading();
+            call.enqueue(new Callback<Token>() {
+                @Override
+                public void onResponse(Call<Token> call, Response<Token> response) {
+                    Token token = response.body();
+                    hideLoading();
+                    if(token != null){
+                        Account ac = token.getAccount();
+                        SharedPreferences pref = getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, MODE_PRIVATE);
+                        SharedPreferences.Editor prefEdit = pref.edit();
+                        Gson gson = new Gson();
+                        String json = gson.toJson(ac);
+                        prefEdit.putString(Constant.KeySharedPreference.USER_KEY_LOGIN, json);
+                        prefEdit.putString(Constant.KeySharedPreference.ACCESS_TOKEN, token.getAccess_token());
+                        prefEdit.commit();
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(MainActivity.this, Constant.Message.ERROR_LOGIN_RESPONSE_API, Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        startActivity(intent);
+                @Override
+                public void onFailure(Call<Token> call, Throwable t) {
+                    hideLoading();
+                    Toast.makeText(MainActivity.this, "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            hideLoading();
+            Toast.makeText(MainActivity.this, Define.NO_INTERNET, Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     //Login facebook with permisstion

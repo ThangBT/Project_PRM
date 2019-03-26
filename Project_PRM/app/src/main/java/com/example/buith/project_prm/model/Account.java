@@ -3,7 +3,10 @@ package com.example.buith.project_prm.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Account {
+import java.io.Serializable;
+import java.util.Date;
+
+public class Account implements Serializable {
     @SerializedName("userName")
     @Expose
     private String username;
@@ -28,15 +31,21 @@ public class Account {
     private String email;
 
     @SerializedName("avatar")
-    private Byte[] avatar;
+    private String avatar;
+
+    @SerializedName("money")
+    private String money;
 
     @SerializedName("role")
     private String role;
 
+    @SerializedName("createdDate")
+    private Date createdDate;
+
     public Account() {
     }
 
-    public Account(String username, String password, String fullname, String address, String phoneNumber, String email, Byte[] avatar, String role) {
+    public Account(String username, String password, String fullname, String address, String phoneNumber, String email, String avatar, String money, String role, Date createdDate) {
         this.username = username;
         this.password = password;
         this.fullname = fullname;
@@ -44,7 +53,9 @@ public class Account {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.avatar = avatar;
+        this.money = money;
         this.role = role;
+        this.createdDate = createdDate;
     }
 
     public String getUsername() {
@@ -95,19 +106,35 @@ public class Account {
         this.email = email;
     }
 
-    public Byte[] getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(Byte[] avatar) {
-        this.avatar = avatar;
-    }
-
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

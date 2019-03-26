@@ -1,20 +1,15 @@
 package com.example.buith.project_prm.adapter;
 
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
-import com.example.buith.project_prm.activity.HomeActivity;
-import com.example.buith.project_prm.activity.ProductsFragment;
-import com.example.buith.project_prm.model.FragmentCommunication;
 import com.example.buith.project_prm.model.ProductType;
+import com.example.buith.project_prm.utils.ImageUtils;
 
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -33,6 +28,10 @@ public class ProductTypeHolder extends BaseHolder<ProductType> {
     public void initData(ProductType data) {
         super.initData(data);
         textView.setText(data.getTypeName());
+        String imageResize = ImageUtils.resizeBase64Image(data.getTypeImage());
+        Bitmap image = ImageUtils.base64ToBitmap(data.getTypeImage());
+
+        imageView.setImageBitmap(image);
     }
 
 }
