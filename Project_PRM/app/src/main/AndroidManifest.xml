@@ -18,7 +18,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:hardwareAccelerated">
+<<<<<<< HEAD
         <activity android:name=".activity.TestActivity"></activity>
+=======
+        <activity android:name=".activity.UpdateProductActivity"></activity>
+>>>>>>> duynk
         <activity android:name=".activity.PaymentActivity" />
         <activity android:name=".activity.MomoHomeActivity" />
         <activity android:name=".activity.AddSellProduct" />

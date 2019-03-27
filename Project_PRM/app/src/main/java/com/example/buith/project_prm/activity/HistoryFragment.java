@@ -102,7 +102,7 @@ public class HistoryFragment extends BaseFragment implements OnLoadProductUser {
         ViewPager viewPager = historyView.findViewById(R.id.nested_viewpager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getFragmentManager());
         OnSellFragement onSellFragement = new OnSellFragement();
-        onSellFragement.setList(list);
+//        onSellFragement.setList(list);
         adapter.addFragment(onSellFragement);
         adapter.addFragment(new SellOutdateFragment());
         viewPager.setAdapter(adapter);

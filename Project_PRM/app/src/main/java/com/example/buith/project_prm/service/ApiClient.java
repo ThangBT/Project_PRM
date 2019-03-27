@@ -3,8 +3,8 @@ package com.example.buith.project_prm.service;
 import com.example.buith.project_prm.model.Account;
 import com.example.buith.project_prm.model.AccountResponse;
 import com.example.buith.project_prm.model.AddressResponse;
-import com.example.buith.project_prm.model.Product;
 import com.example.buith.project_prm.model.ImageListResponse;
+import com.example.buith.project_prm.model.Product;
 import com.example.buith.project_prm.model.ProductResponse;
 import com.example.buith.project_prm.model.ProductType;
 import com.example.buith.project_prm.model.ProductTypeResponse;
@@ -60,8 +60,21 @@ public interface ApiClient {
     // API thêm sản phẩm
     @POST("api/product")
     Call<ProductResponse> addProduct(@Body Product p, @Header("Authorization") String token);
+
+    // API cập nhật sản phẩm
+    @PUT("api/product")
+    Call<ProductResponse> updateProduct(@Body Product p, @Header("Authorization") String token);
+
     // API lấy sản phẩm theo username
     @GET("api/public/user/product/{username}")
     Call<ProductUserResponse> getProductUser(@Path("username") String username);
 
+
+    // API lấy tất cả sản phẩm trạng thái đang bán của người dùng
+    @GET("api/public/user/productsActive/{username}")
+    Call<ProductResponse> getProductActiveByUserName(@Path("username") String username);
+
+    // API lấy tất cả sản phẩm trạng thái ngừng bán của người dùng
+    @GET("api/public/user/productsDisable/{username}")
+    Call<ProductResponse> getProductInactiveByUserName(@Path("username") String username);
 }

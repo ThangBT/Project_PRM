@@ -21,9 +21,8 @@ import com.example.buith.project_prm.adapter.ProductTypeAdapter;
 import com.example.buith.project_prm.constant.Constant;
 import com.example.buith.project_prm.model.Account;
 import com.example.buith.project_prm.model.FragmentCommunication;
-import com.example.buith.project_prm.model.OnLoadProductUser;
 import com.example.buith.project_prm.model.Product;
-import com.example.buith.project_prm.model.ProductUserResponse;
+import com.example.buith.project_prm.model.ProductResponse;
 import com.example.buith.project_prm.network.RetrofitInstance;
 import com.example.buith.project_prm.service.ApiClient;
 import com.google.gson.Gson;
@@ -52,33 +51,22 @@ public class OnSellFragement extends BaseFragment {
     }
 
     public OnSellFragement() {
-
-    }
-
-    public void setList(List<Product> list){
-        this.list = list;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.on_sell_fragment, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.recycleview_on_sell);
-        OnSellAdapter adapter = new OnSellAdapter(this.getContext(),list);
-        adapter.setOnItemClickListener(communication);
-        layoutManager = new LinearLayoutManager(this.getContext());
-        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayout.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        List<Product> list = new ArrayList<>();
+        getProduct();
         return view;
     }
-
-
 
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
         public void onClickImage(int position, Object args) {
-            Intent intent = new Intent(view.getContext(), AddSellProduct.class);
+            Intent intent = new Intent(view.getContext(), UpdateProductActivity.class);
+            intent.putExtra("product", (Product)args);
             Bundle bundle = new Bundle();
             startActivity(intent);
         }
@@ -88,6 +76,41 @@ public class OnSellFragement extends BaseFragment {
     public boolean onBackPressed() {
         return false;
     }
+    public void getProduct(){
+        SharedPreferences pref = getActivity().getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, Context.MODE_PRIVATE);
+        String acc = pref.getString(Constant.KeySharedPreference.USER_KEY_LOGIN, null);
+        Gson gson = new Gson();
+        Account account = gson.fromJson(acc, Account.class);
+        ApiClient apiClient = RetrofitInstance.getRetrofitInstance(view.getContext());
+        Call<ProductResponse> call = apiClient.getProductActiveByUserName(account.getUsername());
+        call.enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                ProductResponse response1 = response.body();
+                if (response1 == null) {
+                    Toast.makeText(view.getContext(), "Không load được dữ liệu loại địa chỉ", Toast.LENGTH_SHORT).show();
+                } else {
+                    List<Product> list = response1.getProductList();
+                    loadProduct(list);
+                }
+            }
+            @Override
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+                Toast.makeText(view.getContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
-
+    public void loadProduct(List<Product> list) {
+        if(list.isEmpty()){
+            list = new ArrayList<>();
+        }
+        RecyclerView recyclerView = view.findViewById(R.id.recycleview_on_sell);
+        OnSellAdapter adapter = new OnSellAdapter(this.getContext(), list);
+        adapter.setOnItemClickListener(communication);
+        layoutManager = new LinearLayoutManager(this.getContext());
+        ((LinearLayoutManager) layoutManager).setOrientation(LinearLayout.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+    }
 }
