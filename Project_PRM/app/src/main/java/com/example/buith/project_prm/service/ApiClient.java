@@ -51,4 +51,12 @@ public interface ApiClient {
     // API thêm sản phẩm
     @POST("api/product")
     Call<ProductResponse> addProduct(@Body Product p, @Header("Authorization") String token);
+
+    // API lấy tất cả sản phẩm trạng thái đang bán của người dùng
+    @GET("api/public/user/productsActive/{username}")
+    Call<ProductResponse> getProductActiveByUserName(@Path("username") String username);
+
+    // API lấy tất cả sản phẩm trạng thái ngừng bán của người dùng
+    @GET("api/public/user/productsDisable/{username}")
+    Call<ProductResponse> getProductInactiveByUserName(@Path("username") String username);
 }
