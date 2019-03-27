@@ -83,7 +83,6 @@ public class SellProductActivity extends BaseActivity implements OnImagesLoaded 
             productName.setText(p.getProductName());
             productPrice.setText(StringUtils.formatMoney(p.getPrice()));
             dateCreate.setText(DateUtils.getTimeByFormat(p.getCreatedDate(), Constant.Pattern.FORMAT_DATE_TIME));
-
             description.setText(p.getDescription());
             loadSeller(this, p.getUserName());
             loadImage(this, p.getProductID());

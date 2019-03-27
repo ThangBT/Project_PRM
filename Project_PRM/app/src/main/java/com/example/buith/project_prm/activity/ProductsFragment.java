@@ -4,9 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.adapter.ProductListAdapter;
@@ -45,6 +50,8 @@ public class ProductsFragment extends BaseFragment implements  OnProductLoaded, 
 
     RecyclerView.LayoutManager layoutManager;
 
+    Toolbar toolbar;
+
     public ProductsFragment() {
     }
 
@@ -59,19 +66,46 @@ public class ProductsFragment extends BaseFragment implements  OnProductLoaded, 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.products_fragment, container, false);
 
+        toolbar = view.findViewById(R.id.toolbar1);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
+        if(((AppCompatActivity) getActivity()).getSupportActionBar() != null){
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
         int typeId = getArguments().getInt(Constant.PRODUCT_TYPE_ID, 0);
         loadProduct(this, typeId);
         loadAddress(this);
         // set action for back arrow
-        ImageView imageView = view.findViewById(R.id.back_arrow);
-        imageView.setOnClickListener(v -> {
+//        ImageView imageView = view.findViewById(R.id.back_arrow);
+//        imageView.setOnClickListener(v -> {
+//            HomeActivity homeActivity = (HomeActivity) getActivity();
+//            if (homeActivity != null) {
+//                homeActivity.replaceFragment(new HomeContainerFragment(), null);
+//            }
+//        });
+
+        return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == android.R.id.home){
             HomeActivity homeActivity = (HomeActivity) getActivity();
             if (homeActivity != null) {
                 homeActivity.replaceFragment(new HomeContainerFragment(), null);
+                return true;
             }
-        });
-
-        return view;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void loadAddress(OnProductLoaded onProductLoaded){
