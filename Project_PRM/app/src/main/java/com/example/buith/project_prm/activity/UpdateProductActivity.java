@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -50,10 +51,13 @@ public class UpdateProductActivity extends AppCompatActivity {
     private EditText productDescription;
     private Spinner spProductType;
     private Spinner spAddress;
+    private EditText productPrice;
     private Button btnAdd;
-
+    private RadioButton rdActive;
+    private RadioButton rdInactive;
     String imageEncoded;
     List<String> imagesEncodedList;
+    private Product product;
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -67,25 +71,34 @@ public class UpdateProductActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
-        Product p = (Product) intent.getSerializableExtra("product");
-
-        setContentView(R.layout.activity_add_sell_product);
-        Toolbar toolbar = findViewById(R.id.toolbar_add);
+        setContentView(R.layout.activity_update_product);
+        Toolbar toolbar = findViewById(R.id.toolbar_add_update);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        productName = findViewById(R.id.input_product_name);
-        productDescription = findViewById(R.id.input_product_description);
-        spProductType = findViewById(R.id.spinnerProductType);
-        spAddress = findViewById(R.id.spinnerAddress);
-        btnAdd = findViewById(R.id.btnAdd);
-
-        productName.setText(p.getProductName());
+        productName = findViewById(R.id.input_product_name_update);
+        productDescription = findViewById(R.id.input_product_description_update);
+        spProductType = findViewById(R.id.spinnerProductType_update);
+        spAddress = findViewById(R.id.spinnerAddress_update);
+        btnAdd = findViewById(R.id.btnUpdate);
+        rdActive = findViewById(R.id.radioButton_active);
+        rdInactive = findViewById(R.id.radioButton_inactive);
+        productPrice = findViewById(R.id.input_product_price_update);
+        //get intent from list product
+        Intent intent = getIntent();
+        product = (Product) intent.getSerializableExtra("product");
+        productName.setText(product.getProductName());
         getProductType();
         getAddress();
+        productPrice.setText(String.valueOf(product.getPrice()));
+        productDescription.setText(product.getDescription());
+        if (product.isStatus()) {
+            rdActive.setChecked(true);
+        } else {
+            rdInactive.setChecked(true);
+        }
 
         imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
                 "://" + getApplicationContext().getResources().getResourcePackageName(R.drawable.user_avatar)
@@ -94,7 +107,7 @@ public class UpdateProductActivity extends AppCompatActivity {
 
         mArrayUri = new ArrayList<>(Arrays.asList(imageUri));
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView_update);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -173,7 +186,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void addProduct(View view) {
+    public void updateProduct(View view) {
         if (!checkValidData()) {
             Product p = new Product();
             p.setProductName(this.productName.getText().toString());
@@ -182,33 +195,33 @@ public class UpdateProductActivity extends AppCompatActivity {
             p.setAddressID(Integer.parseInt(String.valueOf(((Address) this.spAddress.getSelectedItem()).getAddressID())));
             p.setDescription(this.productDescription.getText().toString());
 
-            List<Image> listImg = new ArrayList<>();
+            ArrayList<Image> listImg = new ArrayList<>();
             for (Uri item : mArrayUri) {
                 listImg.add(new Image(0, item.toString()));
             }
             p.setImages(listImg);
-            p.setPrice((long)150000);
+            String priceStr = productPrice.getText().toString();
+            p.setPrice(Long.parseLong(priceStr));
             ApiClient apiClient = RetrofitInstance.getRetrofitInstance(getApplicationContext());
 
             SharedPreferences pref = getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, MODE_PRIVATE);
             String token = pref.getString(Constant.KeySharedPreference.ACCESS_TOKEN, null);
-            Call<ProductResponse> call = apiClient.addProduct(p, "bearer " + token);
+            Call<ProductResponse> call = apiClient.updateProduct(p, "bearer " + token);
             call.enqueue(new Callback<ProductResponse>() {
                 @Override
                 public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                     ProductResponse response1 = response.body();
                     if (response1 == null) {
-                        Toast.makeText(getApplicationContext(), "Xảy ra lỗi khi thêm mới sản phẩm", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Xảy ra lỗi khi cập nhật sản phẩm", Toast.LENGTH_SHORT).show();
                     } else {
                         if (response1.getStatus() == 1) {
-                            Toast.makeText(getApplicationContext(), "Thêm mới sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Cập nhật sản phẩm thành công", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Xảy ra lỗi khi thêm mới sản phẩm", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Xảy ra lỗi khi cập nhật sản phẩm", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
-
                 @Override
                 public void onFailure(Call<ProductResponse> call, Throwable t) {
                     Toast.makeText(getApplicationContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
@@ -225,8 +238,15 @@ public class UpdateProductActivity extends AppCompatActivity {
     }
 
     public boolean checkValidData() {
+        String priceStr = productPrice.getText().toString();
+        try {
+            long price = Long.parseLong(priceStr);
+        } catch ( Exception e){
+            return false;
+        }
+
         return productName.length() == 0 || productDescription.length() == 0
-                || mArrayUri.get(0).toString().equals(imageUri.toString());
+                || mArrayUri.get(0).toString().equals(imageUri.toString()) || productPrice.length() == 0;
     }
 
     public void getProductType() {
@@ -256,7 +276,11 @@ public class UpdateProductActivity extends AppCompatActivity {
                 new ArrayAdapter<ProductType>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spProductType.setAdapter(adapter);
-        spProductType.setSelection(0);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getTypeId() == product.getTypeID()) {
+                spProductType.setSelection(i);
+            }
+        }
     }
 
     public void getAddress() {
@@ -287,6 +311,10 @@ public class UpdateProductActivity extends AppCompatActivity {
                 new ArrayAdapter<Address>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spAddress.setAdapter(adapter);
-        spAddress.setSelection(0);
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getAddressID() == product.getAddressID()) {
+                spAddress.setSelection(i);
+            }
+        }
     }
 }

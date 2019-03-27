@@ -20,8 +20,6 @@ import com.example.buith.project_prm.adapter.OnSellAdapter;
 import com.example.buith.project_prm.adapter.ProductTypeAdapter;
 import com.example.buith.project_prm.constant.Constant;
 import com.example.buith.project_prm.model.Account;
-import com.example.buith.project_prm.model.Address;
-import com.example.buith.project_prm.model.AddressResponse;
 import com.example.buith.project_prm.model.FragmentCommunication;
 import com.example.buith.project_prm.model.Product;
 import com.example.buith.project_prm.model.ProductResponse;
@@ -39,7 +37,19 @@ import retrofit2.Response;
 public class OnSellFragement extends BaseFragment {
 
     private View view;
+
     private RecyclerView.LayoutManager layoutManager;
+
+    private HomeActivity home;
+
+    private List<Product> list;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        home = (HomeActivity) context;
+    }
+
     public OnSellFragement() {
     }
 
@@ -47,6 +57,7 @@ public class OnSellFragement extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.on_sell_fragment, container, false);
+        List<Product> list = new ArrayList<>();
         getProduct();
         return view;
     }
@@ -65,7 +76,6 @@ public class OnSellFragement extends BaseFragment {
     public boolean onBackPressed() {
         return false;
     }
-
     public void getProduct(){
         SharedPreferences pref = getActivity().getSharedPreferences(Constant.KeySharedPreference.USER_LOGIN, Context.MODE_PRIVATE);
         String acc = pref.getString(Constant.KeySharedPreference.USER_KEY_LOGIN, null);

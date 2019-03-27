@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -41,6 +43,7 @@ import com.example.buith.project_prm.network.RetrofitInstance;
 import com.example.buith.project_prm.service.ApiClient;
 import com.google.gson.Gson;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -55,6 +58,7 @@ public class AddSellProduct extends AppCompatActivity {
 
     private EditText productName;
     private EditText productDescription;
+    private EditText productPrice;
     private Spinner spProductType;
     private Spinner spAddress;
     private Button btnAdd;
@@ -101,7 +105,7 @@ public class AddSellProduct extends AppCompatActivity {
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
         layoutManager = new GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
@@ -133,6 +137,10 @@ public class AddSellProduct extends AppCompatActivity {
                 imagesEncodedList = new ArrayList<String>();
                 if (data.getData() != null) {
                     Uri mImageUri = data.getData();
+
+                    /*InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    selectedImage = resizedBitmap(selectedImage, 75);*/
 
                     // Get the cursor
                     Cursor cursor = getContentResolver().query(mImageUri,
@@ -184,8 +192,9 @@ public class AddSellProduct extends AppCompatActivity {
             p.setTypeID(Integer.parseInt(String.valueOf(((ProductType) this.spProductType.getSelectedItem()).getTypeId())));
             p.setAddressID(Integer.parseInt(String.valueOf(((Address) this.spAddress.getSelectedItem()).getAddressID())));
             p.setDescription(this.productDescription.getText().toString());
-
-            List<Image> listImg = new ArrayList<>();
+            String priceStr = productPrice.getText().toString();
+            p.setPrice(Long.parseLong(priceStr));
+            ArrayList<Image> listImg = new ArrayList<>();
             for (Uri item : mArrayUri) {
                 listImg.add(new Image(0, item.toString()));
             }
@@ -228,8 +237,27 @@ public class AddSellProduct extends AppCompatActivity {
     }
 
     public boolean checkValidData() {
+        String priceStr = productPrice.getText().toString();
+        try {
+            long price = Long.parseLong(priceStr);
+        } catch ( Exception e){
+            return false;
+        }
         return productName.length() == 0 || productDescription.length() == 0
+                || productPrice.length() == 0
                 || mArrayUri.get(0).toString().equals(imageUri.toString());
+    }
+
+
+    public Bitmap resizedBitmap(Bitmap image, int maxSize) {
+        return Bitmap.createScaledBitmap(image, maxSize, maxSize, true);
+    }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
 
     public void getProductType() {

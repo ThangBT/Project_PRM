@@ -14,5 +14,6 @@
         android:layout_height="75dp"
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher_round"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="false" />
 </RelativeLayout>

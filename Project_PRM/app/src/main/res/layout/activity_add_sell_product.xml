@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.AddSellProduct">
+    tools:context=".activity.AddSellProduct"
+    android:background="@color/on_sell_item">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_add"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/tabLayout_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,6 +96,30 @@
                 app:layout_constraintStart_toEndOf="@+id/textView9"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerProductType" />
 
+            <EditText
+                android:id="@+id/input_product_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="VND"
+                android:inputType="numberSigned"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textViewPrice"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintHorizontal_bias="0.975"
+                app:layout_constraintStart_toEndOf="@+id/textViewPrice" />
+
+            <TextView
+                android:id="@+id/textViewPrice"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="45dp"
+                android:text="Giá sản phẩm:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="96dp"
@@ -113,7 +138,7 @@
                 android:layout_marginTop="32dp"
                 android:text="Ảnh"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                app:layout_constraintTop_toBottomOf="@+id/input_product_price" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -128,7 +153,7 @@
                 app:layout_constraintEnd_toEndOf="@id/guideline"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerAddress"
+                app:layout_constraintTop_toBottomOf="@+id/input_product_price"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -173,7 +198,9 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/input_product_description"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:background="@color/body_color"
+                />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

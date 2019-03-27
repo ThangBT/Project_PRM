@@ -2,9 +2,10 @@ package com.example.buith.project_prm.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.json.JSONObject;
-
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -27,29 +28,21 @@ public class Product implements Serializable {
     private boolean status;
     @SerializedName("addressID")
     private int addressID;
+    @SerializedName("address")
+    private String address;
     @SerializedName("priority")
     private int priority;
     @SerializedName("numberOfDaysPriority")
     private int numberOfDaysPriority;
     @SerializedName("images")
-    private List<Image> images;
+    private ArrayList<Image> images;
+    @SerializedName("createdDate")
+    private Date createdDate;
 
     public Product() {
     }
 
-    public Product(String productName, int typeId, Long price) {
-        this.productName = productName;
-        this.typeID = typeId;
-        this.price = price;
-    }
-
-    public Product(String productName, Long price, int adressSale) {
-        this.productName = productName;
-        this.price = price;
-        this.addressID = adressSale;
-    }
-
-    public Product(int productID, String productName, int typeID, Long price, String userName, String description, String image, boolean status, int addressID, int priority, int numberOfDaysPriority, List<Image> images) {
+    public Product(int productID, String productName, int typeID, Long price, String userName, String description, String image, boolean status, int addressID, String address, int priority, int numberOfDaysPriority, ArrayList<Image> images, Date createdDate) {
         this.productID = productID;
         this.productName = productName;
         this.typeID = typeID;
@@ -59,9 +52,11 @@ public class Product implements Serializable {
         this.image = image;
         this.status = status;
         this.addressID = addressID;
+        this.address = address;
         this.priority = priority;
         this.numberOfDaysPriority = numberOfDaysPriority;
         this.images = images;
+        this.createdDate = createdDate;
     }
 
     public int getProductID() {
@@ -152,11 +147,27 @@ public class Product implements Serializable {
         this.numberOfDaysPriority = numberOfDaysPriority;
     }
 
-    public List<Image> getImages() {
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public ArrayList<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(ArrayList<Image> images) {
         this.images = images;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

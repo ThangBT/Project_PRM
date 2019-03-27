@@ -2,7 +2,9 @@ package com.example.buith.project_prm.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Image {
+import java.io.Serializable;
+
+public class Image implements Serializable {
     @SerializedName("productID")
     private int productID;
     @SerializedName("image")
