@@ -75,7 +75,6 @@ public class OnSellFragement extends BaseFragment {
 
 
 
-
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
         public void onClickImage(int position, Object args) {
