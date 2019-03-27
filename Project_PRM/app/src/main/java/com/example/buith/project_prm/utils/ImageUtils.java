@@ -17,7 +17,7 @@ public class ImageUtils {
         byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        return scaleDown(decodedByte, 120, true);
+        return decodedByte;
     }
 
     public static Bitmap scaleDown(Bitmap realImage, float maxImageSize,

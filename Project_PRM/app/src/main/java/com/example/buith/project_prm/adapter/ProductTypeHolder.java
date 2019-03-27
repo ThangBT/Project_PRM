@@ -32,7 +32,8 @@ public class ProductTypeHolder extends BaseHolder<ProductType> {
         super.initData(data);
         textView.setText(data.getTypeName());
         Bitmap image = ImageUtils.base64ToBitmap(data.getTypeImage());
-        imageView.setImageBitmap(image);
+//        Glide.with(itemView).load(image).centerCrop().fitCenter().diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+       imageView.setImageBitmap(image);
 
 
     }

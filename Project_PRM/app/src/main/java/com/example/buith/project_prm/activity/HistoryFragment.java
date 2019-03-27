@@ -65,7 +65,6 @@ public class HistoryFragment extends BaseFragment implements OnLoadProductUser {
         Gson json = new Gson();
         Account ac = json.fromJson(accJson, Account.class);
         if(ac == null){
-            Toast.makeText(historyView.getContext(), "Không thể lấy tài khoản", Toast.LENGTH_SHORT).show();
             return;
         }
         ApiClient apiClient = RetrofitInstance.getRetrofitInstance(historyView.getContext());
