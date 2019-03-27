@@ -1166,7 +1166,6 @@ drawable common_google_signin_btn_text_light
 drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
-drawable custom_image
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
 drawable design_ic_visibility
@@ -1275,6 +1274,7 @@ id bottom
 id box_count
 id btnAdd
 id btnFacebook
+id btnGoogle
 id btnPayMoMo
 id btnPaymentMoMo
 id btnRegister
@@ -1356,7 +1356,6 @@ id fl_country_not_found
 id floatingActionButton
 id forever
 id ghost_view
-id glide_custom_view_target_tag
 id gone
 id group_divider
 id groups
@@ -1483,6 +1482,7 @@ id sell_off_recycleview
 id seller_address
 id seller_date_join
 id seller_name
+id setting_menu
 id shortcut
 id showCustom
 id showHome
@@ -1567,8 +1567,6 @@ id wide
 id withText
 id wrap
 id wrap_content
-id wraper1
-id wrapper
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration

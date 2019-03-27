@@ -21,7 +21,6 @@ MERGED from [com.android.support:cardview-v7:28.0.0] /Users/mr.k/.gradle/caches/
 MERGED from [com.android.support:recyclerview-v7:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/recyclerview-v7-28.0.0.aar/a531f443d721d750c5ec65845c91841d/AndroidManifest.xml:17:1-22:12
 MERGED from [com.jakewharton:butterknife:8.8.1] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/butterknife-8.8.1.aar/f81d1ba147315d5454460f4c0d558cb9/AndroidManifest.xml:2:1-7:12
 MERGED from [de.hdodenhof:circleimageview:3.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/circleimageview-3.0.0.aar/28da42d30693d610c61fda3079d8dcc3/AndroidManifest.xml:2:1-11:12
-MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/glide-4.9.0.aar/1a50237d2628c05cf280b7c4f89a69d8/AndroidManifest.xml:2:1-12:12
 MERGED from [com.android.support:support-fragment:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/78052c2305e0da7bd70659e7e6066fbe/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/ea8a93fddc64b61b5ecdbd9289c9a252/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/00af126ffc1cae9a9ed27d1dc5a8dcc5/AndroidManifest.xml:17:1-22:12
@@ -46,7 +45,6 @@ MERGED from [com.android.support:customtabs:27.0.2] /Users/mr.k/.gradle/caches/t
 MERGED from [com.android.support:support-compat:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/0e7697c40e6f8b2988e18dd61657bca6/AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/b077c9baea2bd1714a2206ab858fd572/AndroidManifest.xml:17:1-25:12
 MERGED from [com.android.support:cursoradapter:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/97e2343b000f79dadc80f53364bfb903/AndroidManifest.xml:17:1-22:12
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.9.0.aar/8292b445c70ccdf563d5e0d18f4f67c2/AndroidManifest.xml:2:1-11:12
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/51c2e764347d2382fc8d39f673aebaf7/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:documentfile:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/1442854a08daa9cefd52a6acc5cf80d9/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/9f78882da7cbe644bb83ee8a455543b4/AndroidManifest.xml:17:1-22:12
@@ -117,8 +115,6 @@ MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/mr.k/.
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/06791ad01291b2e7a6c2ddfd2ea790f1/AndroidManifest.xml:22:5-26:19
 MERGED from [de.hdodenhof:circleimageview:3.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/circleimageview-3.0.0.aar/28da42d30693d610c61fda3079d8dcc3/AndroidManifest.xml:9:5-20
 MERGED from [de.hdodenhof:circleimageview:3.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/circleimageview-3.0.0.aar/28da42d30693d610c61fda3079d8dcc3/AndroidManifest.xml:9:5-20
-MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/glide-4.9.0.aar/1a50237d2628c05cf280b7c4f89a69d8/AndroidManifest.xml:10:5-20
-MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/glide-4.9.0.aar/1a50237d2628c05cf280b7c4f89a69d8/AndroidManifest.xml:10:5-20
 MERGED from [com.facebook.android:facebook-places:4.41.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/facebook-places-4.41.0.aar/a7dbe06e82dfe991c9d6dc63a1999782/AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-places:4.41.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/facebook-places-4.41.0.aar/a7dbe06e82dfe991c9d6dc63a1999782/AndroidManifest.xml:28:5-29:19
 MERGED from [com.facebook.android:facebook-applinks:4.41.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/facebook-applinks-4.41.0.aar/d4e0928bfbfe353d6a31748e5bb6669a/AndroidManifest.xml:28:5-29:19
@@ -133,8 +129,6 @@ MERGED from [com.android.support:support-compat:28.0.0] /Users/mr.k/.gradle/cach
 MERGED from [com.android.support:support-compat:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/0e7697c40e6f8b2988e18dd61657bca6/AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/b077c9baea2bd1714a2206ab858fd572/AndroidManifest.xml:22:5-23:19
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/b077c9baea2bd1714a2206ab858fd572/AndroidManifest.xml:22:5-23:19
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.9.0.aar/8292b445c70ccdf563d5e0d18f4f67c2/AndroidManifest.xml:9:5-20
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.9.0.aar/8292b445c70ccdf563d5e0d18f4f67c2/AndroidManifest.xml:9:5-20
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/0e7697c40e6f8b2988e18dd61657bca6/AndroidManifest.xml:22:18-91
 	android:supportsRtl
@@ -280,8 +274,6 @@ MERGED from [com.jakewharton:butterknife:8.8.1] /Users/mr.k/.gradle/caches/trans
 MERGED from [com.jakewharton:butterknife:8.8.1] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/butterknife-8.8.1.aar/f81d1ba147315d5454460f4c0d558cb9/AndroidManifest.xml:5:5-43
 MERGED from [de.hdodenhof:circleimageview:3.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/circleimageview-3.0.0.aar/28da42d30693d610c61fda3079d8dcc3/AndroidManifest.xml:5:5-7:41
 MERGED from [de.hdodenhof:circleimageview:3.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/circleimageview-3.0.0.aar/28da42d30693d610c61fda3079d8dcc3/AndroidManifest.xml:5:5-7:41
-MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/glide-4.9.0.aar/1a50237d2628c05cf280b7c4f89a69d8/AndroidManifest.xml:6:5-8:41
-MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/glide-4.9.0.aar/1a50237d2628c05cf280b7c4f89a69d8/AndroidManifest.xml:6:5-8:41
 MERGED from [com.android.support:support-fragment:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/78052c2305e0da7bd70659e7e6066fbe/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/78052c2305e0da7bd70659e7e6066fbe/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/ea8a93fddc64b61b5ecdbd9289c9a252/AndroidManifest.xml:20:5-44
@@ -330,8 +322,6 @@ MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/mr.k/.gradle
 MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/b077c9baea2bd1714a2206ab858fd572/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cursoradapter:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/97e2343b000f79dadc80f53364bfb903/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:cursoradapter:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/97e2343b000f79dadc80f53364bfb903/AndroidManifest.xml:20:5-44
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.9.0.aar/8292b445c70ccdf563d5e0d18f4f67c2/AndroidManifest.xml:5:5-7:41
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/gifdecoder-4.9.0.aar/8292b445c70ccdf563d5e0d18f4f67c2/AndroidManifest.xml:5:5-7:41
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/51c2e764347d2382fc8d39f673aebaf7/AndroidManifest.xml:20:5-44
 MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/51c2e764347d2382fc8d39f673aebaf7/AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:documentfile:28.0.0] /Users/mr.k/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/1442854a08daa9cefd52a6acc5cf80d9/AndroidManifest.xml:20:5-44
