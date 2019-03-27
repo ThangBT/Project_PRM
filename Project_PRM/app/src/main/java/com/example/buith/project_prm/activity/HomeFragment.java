@@ -1,60 +1,88 @@
 package com.example.buith.project_prm.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.buith.project_prm.R;
 import com.example.buith.project_prm.adapter.ProductTypeAdapter;
+import com.example.buith.project_prm.constant.Constant;
 import com.example.buith.project_prm.model.FragmentCommunication;
+import com.example.buith.project_prm.model.OnDataLoaded;
 import com.example.buith.project_prm.model.ProductType;
+import com.example.buith.project_prm.model.ProductTypeResponse;
+import com.example.buith.project_prm.network.RetrofitInstance;
+import com.example.buith.project_prm.service.ApiClient;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends BaseFragment {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
+public class HomeFragment extends BaseFragment implements OnDataLoaded {
     View homeView;
-    Boolean isBackStack = false;
+
+    HomeActivity home;
+
     private RecyclerView.LayoutManager layoutManager;
     public HomeFragment() {
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        home = (HomeActivity) context;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         homeView = getView() != null ? getView() : inflater.inflate(R.layout.home_fragment, container, false);
-        RecyclerView recyclerView = homeView.findViewById(R.id.my_recycler_view);
-       // recyclerView.setHasFixedSize(true);
-        List<ProductType> list = new ArrayList<>();
-        list.add(new ProductType("", "Thực phẩm"));
-        list.add(new ProductType("", "Bất động sản"));
-        list.add(new ProductType("", "Ô tô, xe máy"));
-        list.add(new ProductType("", "Làm đẹp"));
-        list.add(new ProductType("", "Ngoại thất, đồ gia dụng"));
-        list.add(new ProductType("", "Đồ điện tử"));
-        list.add(new ProductType("", "Thú cưng"));
-
-        ProductTypeAdapter adapter = new ProductTypeAdapter(this.getContext(),list);
-        adapter.setOnItemClickListener(communication);
-
-        layoutManager = new GridLayoutManager(homeView.getContext(), 2);
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        loadProductType(this);
 
         return homeView;
+    }
+
+    // lay danh sach loai san pham tu api
+    public void loadProductType(OnDataLoaded onDataLoaded){
+        ApiClient apiClient = RetrofitInstance.getRetrofitInstance(homeView.getContext());
+        Call<ProductTypeResponse> call = apiClient.getProductTypes();
+        if(home.isNetworkAvailable()) {
+            home.showLoading();
+            call.enqueue(new Callback<ProductTypeResponse>() {
+                @Override
+                public void onResponse(Call<ProductTypeResponse> call, Response<ProductTypeResponse> response) {
+                    home.hideLoading();
+                    ProductTypeResponse response1 = response.body();
+                    if (response1 == null) {
+                        Toast.makeText(homeView.getContext(), "Không load được dữ liệu", Toast.LENGTH_SHORT).show();
+                    } else {
+                        List<ProductType> list = response1.getListProductType();
+                        onDataLoaded.ondataLoaded(list);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ProductTypeResponse> call, Throwable t) {
+                    home.hideLoading();
+
+                    Toast.makeText(homeView.getContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+
+        }
     }
 
     FragmentCommunication communication = new FragmentCommunication() {
@@ -70,5 +98,17 @@ public class HomeFragment extends BaseFragment {
     @Override
     public boolean onBackPressed() {
         return false;
+    }
+
+    @Override
+    public void ondataLoaded(List<ProductType> list) {
+        RecyclerView recyclerView = homeView.findViewById(R.id.my_recycler_view);
+        ProductTypeAdapter adapter = new ProductTypeAdapter(this.getContext(),list);
+        adapter.setOnItemClickListener(communication);
+
+        layoutManager = new GridLayoutManager(homeView.getContext(), 2);
+
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
 }

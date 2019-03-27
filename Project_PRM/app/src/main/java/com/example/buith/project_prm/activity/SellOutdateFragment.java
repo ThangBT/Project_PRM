@@ -35,12 +35,12 @@ public class SellOutdateFragment extends BaseFragment {
         view = inflater.inflate(R.layout.sell_outdate_fragment, container, false);
 
         List<Product> list = new ArrayList<>();
-        list.add(new Product("Cuong", "Bat dong san", 200));
-        list.add(new Product("Cuong1", "Bat dong san", 200));
-        list.add(new Product("Cuong", "Bat dong san", 200));
-        list.add(new Product("Cuong1", "Bat dong san", 200));
-        list.add(new Product("Cuong", "Bat dong san", 200));
-        list.add(new Product("Cuong1", "Bat dong san", 200));
+//        list.add(new Product("Cuong", "Bat dong san", 200.0));
+//        list.add(new Product("Cuong1", "Bat dong san", 200));
+//        list.add(new Product("Cuong", "Bat dong san", 200));
+//        list.add(new Product("Cuong1", "Bat dong san", 200));
+//        list.add(new Product("Cuong", "Bat dong san", 200));
+//        list.add(new Product("Cuong1", "Bat dong san", 200));
         RecyclerView recyclerView = view.findViewById(R.id.sell_off_recycleview);
         OnSellAdapter adapter = new OnSellAdapter(this.getContext(),list);
         adapter.setOnItemClickListener(communication);
