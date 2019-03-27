@@ -62,6 +62,12 @@ public class OnSellFragement extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getProduct();
+    }
+
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
         public void onClickImage(int position, Object args) {

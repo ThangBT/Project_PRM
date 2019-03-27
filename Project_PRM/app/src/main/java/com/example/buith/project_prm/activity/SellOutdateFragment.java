@@ -1,6 +1,7 @@
 package com.example.buith.project_prm.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,10 +51,19 @@ public class SellOutdateFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getProduct();
+    }
+
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
         public void onClickImage(int position, Object args) {
-
+            Intent intent = new Intent(view.getContext(), UpdateProductActivity.class);
+            intent.putExtra("product", (Product)args);
+            Bundle bundle = new Bundle();
+            startActivity(intent);
         }
     };
 

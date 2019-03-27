@@ -195,15 +195,19 @@ public class UpdateProductActivity extends AppCompatActivity {
     public void updateProduct(View view) {
         if (!checkValidData()) {
             Product p = new Product();
+            p.setProductID(product.getProductID());
             p.setProductName(this.productName.getText().toString());
             p.setDescription(this.productDescription.getText().toString());
             p.setTypeID(Integer.parseInt(String.valueOf(((ProductType) this.spProductType.getSelectedItem()).getTypeId())));
             p.setAddressID(Integer.parseInt(String.valueOf(((Address) this.spAddress.getSelectedItem()).getAddressID())));
             p.setDescription(this.productDescription.getText().toString());
-
+            if (rdActive.isChecked()) {
+                p.setStatus(true);
+            } else {
+                p.setStatus(false);
+            }
             ArrayList<Image> listImg = new ArrayList<>();
             for (Uri item : mArrayUri) {
-                listImg.add(new Image(0, item.toString()));
                 try {
                     InputStream imageStream;
                     imageStream = getContentResolver().openInputStream(item);
@@ -237,6 +241,7 @@ public class UpdateProductActivity extends AppCompatActivity {
                         }
                     }
                 }
+
                 @Override
                 public void onFailure(Call<ProductResponse> call, Throwable t) {
                     Toast.makeText(getApplicationContext(), "Something went wrong...Please try later!", Toast.LENGTH_SHORT).show();
@@ -256,7 +261,7 @@ public class UpdateProductActivity extends AppCompatActivity {
         String priceStr = productPrice.getText().toString();
         try {
             long price = Long.parseLong(priceStr);
-        } catch ( Exception e){
+        } catch (Exception e) {
             return false;
         }
 
@@ -333,10 +338,9 @@ public class UpdateProductActivity extends AppCompatActivity {
         }
     }
 
-    private String encodeImage(Bitmap bm)
-    {
+    private String encodeImage(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
         String encImage = Base64.encodeToString(b, Base64.DEFAULT);
         return encImage;

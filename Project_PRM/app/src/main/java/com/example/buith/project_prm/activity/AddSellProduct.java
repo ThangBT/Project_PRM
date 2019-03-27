@@ -197,7 +197,6 @@ public class AddSellProduct extends AppCompatActivity {
             p.setPrice(Long.parseLong(priceStr));
             ArrayList<Image> listImg = new ArrayList<>();
             for (Uri item : mArrayUri) {
-                listImg.add(new Image(0, item.toString()));
                 try {
                     InputStream imageStream;
                     imageStream = getContentResolver().openInputStream(item);
