@@ -2,9 +2,12 @@ package com.example.buith.project_prm.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
     ArrayList<Uri> mArrayUri;
     Activity activity;
+    ArrayList<String> listImg;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -31,9 +35,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         }
     }
 
-    public MyRecyclerAdapter(Activity activity, ArrayList<Uri> mArrayUri) {
+//    public MyRecyclerAdapter(Activity activity, ArrayList<Uri> mArrayUri) {
+//        this.activity = activity;
+//        this.mArrayUri = mArrayUri;
+//    }
+
+    public MyRecyclerAdapter(Activity activity, ArrayList<String> listImg) {
         this.activity = activity;
-        this.mArrayUri = mArrayUri;
+        this.listImg = listImg;
     }
 
     @Override
@@ -47,6 +56,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
         //myViewHolder.imageView.setImageURI(mArrayUri.get(position));
+        byte[] decodedString = Base64.decode(listImg.get(position), Base64.DEFAULT);
+        Bitmap imageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        myViewHolder.imageView.setImageBitmap(imageBitmap);
         myViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +73,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
     @Override
     public int getItemCount() {
-        if (mArrayUri != null) return mArrayUri.size();
+        if (listImg != null) return listImg.size();
         return -1;
     }
 }
