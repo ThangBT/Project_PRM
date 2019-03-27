@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -197,6 +198,15 @@ public class AddSellProduct extends AppCompatActivity {
             ArrayList<Image> listImg = new ArrayList<>();
             for (Uri item : mArrayUri) {
                 listImg.add(new Image(0, item.toString()));
+                try {
+                    InputStream imageStream;
+                    imageStream = getContentResolver().openInputStream(item);
+                    Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    String encodedImage = encodeImage(selectedImage);
+                    listImg.add(new Image(0, encodedImage));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
             p.setImages(listImg);
             p.setPrice((long)150000);
@@ -319,5 +329,14 @@ public class AddSellProduct extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spAddress.setAdapter(adapter);
         spAddress.setSelection(0);
+    }
+
+    private String encodeImage(Bitmap bm)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+        return encImage;
     }
 }

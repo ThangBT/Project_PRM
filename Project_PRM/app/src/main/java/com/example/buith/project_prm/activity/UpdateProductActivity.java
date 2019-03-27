@@ -5,6 +5,8 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -36,6 +39,9 @@ import com.example.buith.project_prm.model.ProductTypeResponse;
 import com.example.buith.project_prm.network.RetrofitInstance;
 import com.example.buith.project_prm.service.ApiClient;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -198,6 +204,15 @@ public class UpdateProductActivity extends AppCompatActivity {
             ArrayList<Image> listImg = new ArrayList<>();
             for (Uri item : mArrayUri) {
                 listImg.add(new Image(0, item.toString()));
+                try {
+                    InputStream imageStream;
+                    imageStream = getContentResolver().openInputStream(item);
+                    Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                    String encodedImage = encodeImage(selectedImage);
+                    listImg.add(new Image(0, encodedImage));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
             p.setImages(listImg);
             String priceStr = productPrice.getText().toString();
@@ -316,5 +331,14 @@ public class UpdateProductActivity extends AppCompatActivity {
                 spAddress.setSelection(i);
             }
         }
+    }
+
+    private String encodeImage(Bitmap bm)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+        return encImage;
     }
 }
