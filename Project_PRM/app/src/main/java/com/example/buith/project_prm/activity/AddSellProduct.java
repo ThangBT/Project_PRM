@@ -90,7 +90,7 @@ public class AddSellProduct extends AppCompatActivity {
         spProductType = findViewById(R.id.spinnerProductType);
         spAddress = findViewById(R.id.spinnerAddress);
         btnAdd = findViewById(R.id.btnAdd);
-
+        productPrice = findViewById(R.id.input_product_price);
         getProductType();
         getAddress();
 
@@ -245,7 +245,7 @@ public class AddSellProduct extends AppCompatActivity {
         }
         return productName.length() == 0 || productDescription.length() == 0
                 || productPrice.length() == 0
-                || mArrayUri.get(0).toString().equals(imageUri.toString());
+                || mArrayUri.get(0).toString().equals(imageUri.toString()) || productPrice.length() == 0;
     }
 
 
