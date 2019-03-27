@@ -20,7 +20,6 @@ public class OnSellHolder extends BaseHolder<Product> {
     TextView typeId;
     @BindView(R.id.price)
     TextView price;
-
     @BindView(R.id.image_on_sell)
     ImageView imageView;
 
@@ -33,7 +32,7 @@ public class OnSellHolder extends BaseHolder<Product> {
     public void initData(Product data) {
         super.initData(data);
         productName.setText(data.getProductName());
-        typeId.setText(String.valueOf(data.getTypeID()));
+        typeId.setText(String.valueOf(data.getDescription()));
         price.setText(data.getPrice().toString());
         byte[] decodedString = Base64.decode(data.getImage(), Base64.DEFAULT);
         Bitmap imageBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

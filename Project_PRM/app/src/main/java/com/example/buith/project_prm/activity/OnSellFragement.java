@@ -54,7 +54,8 @@ public class OnSellFragement extends BaseFragment {
     FragmentCommunication communication = new FragmentCommunication() {
         @Override
         public void onClickImage(int position, Object args) {
-            Intent intent = new Intent(view.getContext(), AddSellProduct.class);
+            Intent intent = new Intent(view.getContext(), UpdateProductActivity.class);
+            intent.putExtra("product", (Product)args);
             Bundle bundle = new Bundle();
             startActivity(intent);
         }
